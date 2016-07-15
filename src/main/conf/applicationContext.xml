@@ -4,23 +4,22 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans     
-            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd    
-            http://www.springframework.org/schema/aop     
-            http://www.springframework.org/schema/aop/spring-aop-3.2.xsd    
-            http://www.springframework.org/schema/mvc    
-            http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd    
-            http://www.springframework.org/schema/tx     
-            http://www.springframework.org/schema/tx/spring-tx-3.2.xsd    
-            http://www.springframework.org/schema/util     
-            http://www.springframework.org/schema/util/spring-util-3.2.xsd    
-            http://www.springframework.org/schema/context     
-            http://www.springframework.org/schema/context/spring-context-3.2.xsd    
-            http://www.springframework.org/schema/jdbc    
-            http://www.springframework.org/schema/context/spring-jdbc-3.2.xsd    
-            http://www.springframework.org/schema/cache     
-            http://www.springframework.org/schema/context/spring-cache-3.2.xsd"
-	default-autowire="byName">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-3.2.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.2.xsd
+            http://www.springframework.org/schema/jdbc
+            http://www.springframework.org/schema/context/spring-jdbc-3.2.xsd
+            http://www.springframework.org/schema/cache
+            http://www.springframework.org/schema/context/spring-cache-3.2.xsd">
 
 	<!-- spring的自动查找bean功能 @Repository、@Service、@Controller， 它们分别对应存储层Bean dao，业务层Bean 
 		service，和展示层Bean controller-servlet -->
