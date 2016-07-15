@@ -1,5 +1,6 @@
 package com.jxlianlian.spring.test;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,10 @@ import com.jxlianlian.spring.mongo.model.MongoUser;
 import com.jxlianlian.spring.mybatis.model.User;
 import com.jxlianlian.spring.service.UserService;
 import com.jxlianlian.util.JsonUtil;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.crypto.MacProvider;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -58,11 +63,18 @@ public class MyTest extends AbstractTransactionalJUnit4SpringContextTests {
     // numbers.add(index++, 108901);
     // mongoUser.setNumbers(numbers);
     // articleDao.insert(mongoUser);
-    List<MongoUser> user = articleDao.findList(0, 100);
-    for (int i = 0; i < user.size(); ++i) {
-      mLogger.error(user.get(i).toString());
-    }
-    MongoUser u = articleDao.findOneByLink(100067);
-    mLogger.error(u.toString());
+    // List<MongoUser> user = articleDao.findList(0, 100);
+    // for (int i = 0; i < user.size(); ++i) {
+    // mLogger.error(user.get(i).toString());
+    // }
+    // MongoUser u = articleDao.findOneByLink(100067);
+    // mLogger.error(u.toString());
+    System.out.println("generateKey");
+    Key key = MacProvider.generateKey();
+    String encoded = new String(key.getEncoded(),"UTF-8");
+    System.out
+        .println("format=" + key.getFormat() + ", encoded=" + encoded + ", Algorithm=" + key.getAlgorithm());
+    String compactJws = Jwts.builder().setSubject("Joe").signWith(SignatureAlgorithm.HS512, key).compact();
+    System.out.println(compactJws);
   }
 }

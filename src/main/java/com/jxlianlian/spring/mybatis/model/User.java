@@ -56,6 +56,8 @@ public class User implements Serializable {
   private Long exp;
 
   private String signature;
+  
+  private Byte closeDown;
 
   public Long getUserId() {
     return userId;
@@ -241,6 +243,14 @@ public class User implements Serializable {
     this.signature = signature == null ? null : signature.trim();
   }
 
+  public Byte getCloseDown() {
+    return closeDown;
+  }
+
+  public void setCloseDown(Byte closeDown) {
+    this.closeDown = closeDown;
+  }
+
   @Override
   public String toString() {
     return "User [userId=" + userId + ", userAccount=" + userAccount + ", wxId=" + wxId + ", qqId=" + qqId
@@ -248,7 +258,7 @@ public class User implements Serializable {
         + email + ", way=" + way + ", insertTime=" + insertTime + ", updateTime=" + updateTime + ", balance=" + balance
         + ", points=" + points + ", qq=" + qq + ", defaultShippingAddressId=" + defaultShippingAddressId + ", userName="
         + userName + ", head=" + head + ", gender=" + gender + ", birthday=" + birthday + ", currentLocation="
-        + currentLocation + ", homeTown=" + homeTown + ", exp=" + exp + ", signature=" + signature + "]";
+        + currentLocation + ", homeTown=" + homeTown + ", exp=" + exp + ", signature=" + signature + ", closeDown="
+        + closeDown + "]";
   }
-
 }

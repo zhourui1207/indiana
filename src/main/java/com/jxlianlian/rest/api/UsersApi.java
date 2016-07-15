@@ -1,21 +1,14 @@
 package com.jxlianlian.rest.api;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jxlianlian.common.Const;
+import com.jxlianlian.rest.message.ErrorInfo;
+import com.jxlianlian.rest.message.StatusCode;
 import com.jxlianlian.spring.mybatis.model.User;
 import com.jxlianlian.spring.context.SpringContext;
-import com.jxlianlian.spring.mongo.dao.MongoUserDao;
-import com.jxlianlian.spring.mongo.model.MongoUser;
 import com.jxlianlian.spring.service.UserService;
-import com.jxlianlian.util.DateUtil;
 import com.jxlianlian.util.JsonUtil;
-import com.taobao.api.ApiException;
-import com.taobao.api.DefaultTaobaoClient;
-import com.taobao.api.TaobaoClient;
-import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
-import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 
 import javax.ws.rs.core.Response;
 
@@ -32,106 +25,56 @@ import javax.ws.rs.QueryParam;
 public class UsersApi {
   private Logger logger = Logger.getLogger(UsersApi.class);
 
-  private MongoUserDao articleDao;
-
-  private MongoUserDao getMongoUserDao() {
-    if (articleDao == null) {
-      articleDao = SpringContext.getBean("MongoUserDao");
+  private UserService userService = SpringContext.getBean("UserService");
+  
+  private User queryUserByUserId(Long userId) {
+    User user = null;
+    try {
+      user = userService.queryUserByUserId(userId);
+    } catch (Exception e) {
+      logger.error("queryUserByUserId failed! userId=" + userId, e);
     }
-    return articleDao;
+    return user;
   }
-
-  private UserService mUserService = null;
-
-  private UserService getUserService() {
-    if (mUserService == null) {
-      mUserService = SpringContext.getBean("UserService");
+  
+  private User queryUserByUserAccount(String userAccount) {
+    User user = null;
+    try {
+      user = userService.queryUserByUserAccount(userAccount);
+    } catch (Exception e) {
+      logger.error("queryUserByUserAccount failed! userAccount=" + userAccount, e);
     }
-    return mUserService;
+    return user;
   }
 
   @GET
-  @Path("/{id}")
-  // @Produces("/users")
-  public Response queryUserById(@PathParam("id") Long id) {
-    
-    String url = "http://gw.api.taobao.com/router/rest";
-    String appkey = "23407772";
-    String secret = "0fcc51e262c2710b82004f49876705d1";
-    TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
-    AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
-    req.setExtend("123456");
-    req.setSmsType("normal");
-    req.setSmsFreeSignName("");
-    req.setSmsParamString("{\"code\":\"1234\",\"product\":\"惊喜连连\"}");
-    req.setRecNum("17006421542");
-    req.setSmsTemplateCode("SMS_12400448");
-    AlibabaAliqinFcSmsNumSendResponse rsp = null;
-    try {
-      rsp = client.execute(req);
-    } catch (ApiException e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
-    }
-    System.out.println(rsp.getBody());
-    
-    UserService userService = SpringContext.getBean("UserService");
-
-    
-    
-    int ret = 404;
-    User user = null;
-
-    try {
-      user = userService.queryUserById(id);
-    } catch (Exception e) {
-      logger.error("", e);
+  @Path("/{userId}")
+  public Response getUserByUserId(@PathParam("userId") Long userId) {
+    logger.info("getUserByUserId(" + userId + ")");
+   
+    User user = queryUserByUserId(userId);
+    if (user == null) { // 该用户资源不存在
+      return Response.status(StatusCode.NOT_FOUND)
+          .entity(ErrorInfo.messagge(StatusCode.NOT_FOUND, ErrorInfo.USER_NO_EXISTED)).build();
     }
 
-    if (user == null) {
-      ret = 404;
-    } else {
-      ret = 200;
-    }
-
-    return Response.status(ret).entity(JsonUtil.toJSon(user)).build();
+    return Response.status(StatusCode.OK).entity(JsonUtil.toJSon(user)).build();
   }
 
   @GET
   @Path("/")
-  public Response queryUserList() {
-    logger.info("queryUserList");
-
-    int ret = 404;
-    List<User> userList = null;
-
-    try {
-      userList = getUserService().queryUserlist();
-    } catch (Exception e) {
-      logger.error("", e);
+  public Response getUserByParam(@QueryParam("userId") Long userId, @QueryParam("masterUserId") Long masterUserId) {
+    
+    logger.info("getUserByParam(userId=" + userId + ", masterUserId=" + masterUserId + ")");
+    
+    User user;
+    if (userId != null) {
+      user = queryUserByUserId(userId);
+    } else if (masterUserId != null) {
+      
     }
 
-    if (userList == null) {
-      ret = 404;
-    } else {
-      ret = 200;
-    }
-
-    String json = "{\"name\":113, \"id\":\"12345\", \"age\":36, \"time\":\"" + "1467614493000" + "\"}";
-    User user = JsonUtil.readValue(json, User.class);
-    try {
-      MongoUser article = new MongoUser();
-      article.setName("zhourui123");
-      getMongoUserDao().insert(article);
-      List<MongoUser> aa = articleDao.findList(0, 100);
-      for (int i = 0; i < aa.size(); ++i) {
-        logger.error(aa.get(i).getId() + "; " + aa.get(i).getName());
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    return Response.status(ret).entity(JsonUtil.toJSon(userList)).build();
+    return Response.status(200).entity(JsonUtil.toJSon("haha")).build();
   }
 
   @PUT

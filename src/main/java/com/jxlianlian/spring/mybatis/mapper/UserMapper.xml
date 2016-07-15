@@ -31,21 +31,75 @@
 		<result column="home_town" property="homeTown" jdbcType="VARCHAR" />
 		<result column="exp" property="exp" jdbcType="BIGINT" />
 		<result column="signature" property="signature" jdbcType="VARCHAR" />
+		<result column="close_down" property="closeDown" jdbcType="TINYINT" />
 	</resultMap>
+	
+	<sql id="Sample_Query_Column_List">
+    user_id, user_name, close_down
+  </sql>
 	<sql id="Base_Column_List">
 		user_id, user_account, wx_id, qq_id, master_user_id, user_type, user_password,
 		email,
 		way, insert_time, update_time, balance, points, qq,
 		default_shipping_address_id,
-		user_name, head, gender, birthday, current_location, home_town, exp, signature
+		user_name, head, gender, birthday, current_location, home_town, exp, signature, close_down
 	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+	<sql id="Other_User_Query_Column_List">
+    user_id, user_name, head, gender, birthday, current_location, home_town, exp, signature
+  </sql>
+  
+  <!-- 用主键查询一般是别的用户查的 -->
+	<select id="selectByUserId" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
 		select
-		<include refid="Base_Column_List" />
+		<include refid="Other_User_Query_Column_List" />
 		from user
 		where user_id = #{userId,jdbcType=BIGINT}
 	</select>
+	<!-- 这个用户自己查询，才能查询到详细的信息 -->
+	<select id="selectByUserIdSelf" resultMap="BaseResultMap"
+    parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+	<select id="selectByUserAccount" resultMap="BaseResultMap"
+    parameterType="java.lang.String">
+    select
+    <include refid="Sample_Query_Column_List" />
+    from user
+    where user_account = #{userAccount,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByWxId" resultMap="BaseResultMap"
+    parameterType="java.lang.String">
+    select
+    <include refid="Sample_Query_Column_List" />
+    from user
+    where wx_id = #{wxId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByQqId" resultMap="BaseResultMap"
+    parameterType="java.lang.String">
+    select
+    <include refid="Sample_Query_Column_List" />
+    from user
+    where qq_id = #{qqId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUserName" resultMap="BaseResultMap"
+    parameterType="java.lang.String">
+    select
+    <include refid="Sample_Query_Column_List" />
+    from user
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByMasterUserId" resultMap="BaseResultMap"
+    parameterType="java.lang.Long">
+    select
+    <include refid="Sample_Query_Column_List" />
+    from user
+    where master_user_id = #{masterUserId,jdbcType=BIGINT}
+  </select>
+  
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		delete from user
 		where user_id = #{userId,jdbcType=BIGINT}

@@ -1,6 +1,13 @@
 package com.jxlianlian.common;
 
+import java.security.Key;
+
+import com.jxlianlian.util.KeyUtil;
+
 public final class Const {
+  //JWT秘钥
+  public static final String SECRET_KEY_STRING = "jxlianlian.zhourui";
+  
   //短信模块，调用阿里大鱼接口
   public static final String SMS_URL = "http://gw.api.taobao.com/router/rest";
   public static final String SMS_APP_KEY = "23407772";

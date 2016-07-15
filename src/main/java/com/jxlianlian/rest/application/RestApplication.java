@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.ws.rs.core.Application;
+
+import com.jxlianlian.rest.api.TokenApi;
 import com.jxlianlian.rest.api.UsersApi;
 
 public class RestApplication extends Application {
@@ -13,6 +15,7 @@ public class RestApplication extends Application {
 
   @Override
   public Set<Class<?>> getClasses() {
+    classes.add(TokenApi.class);
     classes.add(UsersApi.class);
     return classes;
   }

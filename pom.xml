@@ -22,6 +22,7 @@
 		<mongodbjdbc.version>3.2.2</mongodbjdbc.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
 		<org.hibernate.version>5.0.2.Final</org.hibernate.version>
+		<jjwt.version>0.6.0</jjwt.version>
 	</properties>
 
 	<repositories>
@@ -180,7 +181,7 @@
 			<version>1</version> </dependency> -->
 
 		<!-- JSON -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>${json.version}</version>
@@ -189,7 +190,21 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-jaxrs</artifactId>
 			<version>${json.version}</version>
+		</dependency> -->
+		
+		<!-- MD5 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
 		</dependency>
+		
+		<!-- JWT -->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>${jjwt.version}</version>
+    </dependency>
 
 		<!-- javax.validation相关 -->
 		<dependency>
