@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxlianlian.spring.mybatis.dao.UserMapper">
+  <!-- Cache 配置 -->  
+  <cache eviction="FIFO" flushInterval="3600000" size="1024"/> 
+	<resultMap id="BaseResultMap" type="com.jxlianlian.spring.mybatis.model.User">
+		<id column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+		<result column="wx_id" property="wxId" jdbcType="VARCHAR" />
+		<result column="qq_id" property="qqId" jdbcType="VARCHAR" />
+		<result column="master_user_id" property="masterUserId"
+			jdbcType="BIGINT" />
+		<result column="user_type" property="userType" jdbcType="TINYINT" />
+		<result column="user_password" property="userPassword"
+			jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="way" property="way" jdbcType="TINYINT" />
+		<result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="balance" property="balance" jdbcType="DECIMAL" />
+		<result column="points" property="points" jdbcType="BIGINT" />
+		<result column="qq" property="qq" jdbcType="VARCHAR" />
+		<result column="default_shipping_address_id" property="defaultShippingAddressId"
+			jdbcType="BIGINT" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="head" property="head" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="TINYINT" />
+		<result column="birthday" property="birthday" jdbcType="DATE" />
+		<result column="current_location" property="currentLocation"
+			jdbcType="VARCHAR" />
+		<result column="home_town" property="homeTown" jdbcType="VARCHAR" />
+		<result column="exp" property="exp" jdbcType="BIGINT" />
+		<result column="signature" property="signature" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		user_id, user_account, wx_id, qq_id, master_user_id, user_type, user_password,
+		email,
+		way, insert_time, update_time, balance, points, qq,
+		default_shipping_address_id,
+		user_name, head, gender, birthday, current_location, home_town, exp, signature
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where user_id = #{userId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from user
+		where user_id = #{userId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.User">
+		insert into user (user_id, user_account, wx_id,
+		qq_id, master_user_id, user_type,
+		user_password, email, way,
+		insert_time, update_time, balance,
+		points, qq, default_shipping_address_id,
+		user_name, head, gender,
+		birthday, current_location, home_town,
+		exp, signature)
+		values (#{userId,jdbcType=BIGINT}, #{userAccount,jdbcType=VARCHAR},
+		#{wxId,jdbcType=VARCHAR},
+		#{qqId,jdbcType=VARCHAR}, #{masterUserId,jdbcType=BIGINT}, #{userType,jdbcType=TINYINT},
+		#{userPassword,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+		#{way,jdbcType=TINYINT},
+		#{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{balance,jdbcType=DECIMAL},
+		#{points,jdbcType=BIGINT}, #{qq,jdbcType=VARCHAR},
+		#{defaultShippingAddressId,jdbcType=BIGINT},
+		#{userName,jdbcType=VARCHAR}, #{head,jdbcType=VARCHAR},
+		#{gender,jdbcType=TINYINT},
+		#{birthday,jdbcType=DATE}, #{currentLocation,jdbcType=VARCHAR}, #{homeTown,jdbcType=VARCHAR},
+		#{exp,jdbcType=BIGINT}, #{signature,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.jxlianlian.spring.mybatis.model.User">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userAccount != null">
+				user_account,
+			</if>
+			<if test="wxId != null">
+				wx_id,
+			</if>
+			<if test="qqId != null">
+				qq_id,
+			</if>
+			<if test="masterUserId != null">
+				master_user_id,
+			</if>
+			<if test="userType != null">
+				user_type,
+			</if>
+			<if test="userPassword != null">
+				user_password,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="way != null">
+				way,
+			</if>
+			<if test="insertTime != null">
+				insert_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="balance != null">
+				balance,
+			</if>
+			<if test="points != null">
+				points,
+			</if>
+			<if test="qq != null">
+				qq,
+			</if>
+			<if test="defaultShippingAddressId != null">
+				default_shipping_address_id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="head != null">
+				head,
+			</if>
+			<if test="gender != null">
+				gender,
+			</if>
+			<if test="birthday != null">
+				birthday,
+			</if>
+			<if test="currentLocation != null">
+				current_location,
+			</if>
+			<if test="homeTown != null">
+				home_town,
+			</if>
+			<if test="exp != null">
+				exp,
+			</if>
+			<if test="signature != null">
+				signature,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userAccount != null">
+				#{userAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="wxId != null">
+				#{wxId,jdbcType=VARCHAR},
+			</if>
+			<if test="qqId != null">
+				#{qqId,jdbcType=VARCHAR},
+			</if>
+			<if test="masterUserId != null">
+				#{masterUserId,jdbcType=BIGINT},
+			</if>
+			<if test="userType != null">
+				#{userType,jdbcType=TINYINT},
+			</if>
+			<if test="userPassword != null">
+				#{userPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="way != null">
+				#{way,jdbcType=TINYINT},
+			</if>
+			<if test="insertTime != null">
+				#{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="balance != null">
+				#{balance,jdbcType=DECIMAL},
+			</if>
+			<if test="points != null">
+				#{points,jdbcType=BIGINT},
+			</if>
+			<if test="qq != null">
+				#{qq,jdbcType=VARCHAR},
+			</if>
+			<if test="defaultShippingAddressId != null">
+				#{defaultShippingAddressId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="head != null">
+				#{head,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				#{gender,jdbcType=TINYINT},
+			</if>
+			<if test="birthday != null">
+				#{birthday,jdbcType=DATE},
+			</if>
+			<if test="currentLocation != null">
+				#{currentLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="homeTown != null">
+				#{homeTown,jdbcType=VARCHAR},
+			</if>
+			<if test="exp != null">
+				#{exp,jdbcType=BIGINT},
+			</if>
+			<if test="signature != null">
+				#{signature,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.jxlianlian.spring.mybatis.model.User">
+		update user
+		<set>
+			<if test="userAccount != null">
+				user_account = #{userAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="wxId != null">
+				wx_id = #{wxId,jdbcType=VARCHAR},
+			</if>
+			<if test="qqId != null">
+				qq_id = #{qqId,jdbcType=VARCHAR},
+			</if>
+			<if test="masterUserId != null">
+				master_user_id = #{masterUserId,jdbcType=BIGINT},
+			</if>
+			<if test="userType != null">
+				user_type = #{userType,jdbcType=TINYINT},
+			</if>
+			<if test="userPassword != null">
+				user_password = #{userPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="way != null">
+				way = #{way,jdbcType=TINYINT},
+			</if>
+			<if test="insertTime != null">
+				insert_time = #{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="balance != null">
+				balance = #{balance,jdbcType=DECIMAL},
+			</if>
+			<if test="points != null">
+				points = #{points,jdbcType=BIGINT},
+			</if>
+			<if test="qq != null">
+				qq = #{qq,jdbcType=VARCHAR},
+			</if>
+			<if test="defaultShippingAddressId != null">
+				default_shipping_address_id =
+				#{defaultShippingAddressId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="head != null">
+				head = #{head,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				gender = #{gender,jdbcType=TINYINT},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday,jdbcType=DATE},
+			</if>
+			<if test="currentLocation != null">
+				current_location = #{currentLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="homeTown != null">
+				home_town = #{homeTown,jdbcType=VARCHAR},
+			</if>
+			<if test="exp != null">
+				exp = #{exp,jdbcType=BIGINT},
+			</if>
+			<if test="signature != null">
+				signature = #{signature,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where user_id = #{userId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.User">
+		update user
+		set user_account = #{userAccount,jdbcType=VARCHAR},
+		wx_id = #{wxId,jdbcType=VARCHAR},
+		qq_id = #{qqId,jdbcType=VARCHAR},
+		master_user_id = #{masterUserId,jdbcType=BIGINT},
+		user_type = #{userType,jdbcType=TINYINT},
+		user_password = #{userPassword,jdbcType=VARCHAR},
+		email = #{email,jdbcType=VARCHAR},
+		way = #{way,jdbcType=TINYINT},
+		insert_time = #{insertTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		balance = #{balance,jdbcType=DECIMAL},
+		points = #{points,jdbcType=BIGINT},
+		qq = #{qq,jdbcType=VARCHAR},
+		default_shipping_address_id = #{defaultShippingAddressId,jdbcType=BIGINT},
+		user_name = #{userName,jdbcType=VARCHAR},
+		head = #{head,jdbcType=VARCHAR},
+		gender = #{gender,jdbcType=TINYINT},
+		birthday = #{birthday,jdbcType=DATE},
+		current_location = #{currentLocation,jdbcType=VARCHAR},
+		home_town = #{homeTown,jdbcType=VARCHAR},
+		exp = #{exp,jdbcType=BIGINT},
+		signature = #{signature,jdbcType=VARCHAR}
+		where user_id = #{userId,jdbcType=BIGINT}
+	</update>
+</mapper>

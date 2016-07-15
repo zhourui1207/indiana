@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxlianlian.spring.mybatis.dao.SellingGoodsMapper">
+  <!-- Cache 配置 -->  
+  <cache eviction="FIFO" flushInterval="5000" size="512"/>
+	<resultMap id="BaseResultMap"
+		type="com.jxlianlian.spring.mybatis.model.SellingGoods">
+		<id column="selling_goods_id" property="sellingGoodsId" jdbcType="BIGINT" />
+		<result column="goods_template_id" property="goodsTemplateId"
+			jdbcType="BIGINT" />
+		<result column="period" property="period" jdbcType="BIGINT" />
+		<result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+		<result column="is_selling" property="isSelling" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		selling_goods_id, goods_template_id, period, goods_id, is_selling
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from selling_goods
+		where selling_goods_id = #{sellingGoodsId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from selling_goods
+		where selling_goods_id = #{sellingGoodsId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.SellingGoods">
+		insert into selling_goods (selling_goods_id, goods_template_id,
+		period,
+		goods_id, is_selling)
+		values (#{sellingGoodsId,jdbcType=BIGINT},
+		#{goodsTemplateId,jdbcType=BIGINT}, #{period,jdbcType=BIGINT},
+		#{goodsId,jdbcType=BIGINT}, #{isSelling,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.jxlianlian.spring.mybatis.model.SellingGoods">
+		insert into selling_goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sellingGoodsId != null">
+				selling_goods_id,
+			</if>
+			<if test="goodsTemplateId != null">
+				goods_template_id,
+			</if>
+			<if test="period != null">
+				period,
+			</if>
+			<if test="goodsId != null">
+				goods_id,
+			</if>
+			<if test="isSelling != null">
+				is_selling,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sellingGoodsId != null">
+				#{sellingGoodsId,jdbcType=BIGINT},
+			</if>
+			<if test="goodsTemplateId != null">
+				#{goodsTemplateId,jdbcType=BIGINT},
+			</if>
+			<if test="period != null">
+				#{period,jdbcType=BIGINT},
+			</if>
+			<if test="goodsId != null">
+				#{goodsId,jdbcType=BIGINT},
+			</if>
+			<if test="isSelling != null">
+				#{isSelling,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.jxlianlian.spring.mybatis.model.SellingGoods">
+		update selling_goods
+		<set>
+			<if test="goodsTemplateId != null">
+				goods_template_id = #{goodsTemplateId,jdbcType=BIGINT},
+			</if>
+			<if test="period != null">
+				period = #{period,jdbcType=BIGINT},
+			</if>
+			<if test="goodsId != null">
+				goods_id = #{goodsId,jdbcType=BIGINT},
+			</if>
+			<if test="isSelling != null">
+				is_selling = #{isSelling,jdbcType=INTEGER},
+			</if>
+		</set>
+		where selling_goods_id = #{sellingGoodsId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.SellingGoods">
+		update selling_goods
+		set goods_template_id = #{goodsTemplateId,jdbcType=BIGINT},
+		period = #{period,jdbcType=BIGINT},
+		goods_id = #{goodsId,jdbcType=BIGINT},
+		is_selling = #{isSelling,jdbcType=INTEGER}
+		where selling_goods_id = #{sellingGoodsId,jdbcType=BIGINT}
+	</update>
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 遇上下划线自动转成驼峰格式 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 开启二级缓存，同时需要在每个对应的mapper文件做缓存配置 -->
+		<setting name="cacheEnabled" value="true" />
+		<!-- 开启二级缓存 下面代码复制到mapper.xml文件中 -->
+		<!-- 只读的话，不需要序列化，但是两个程序同时操作一个对象会有问题 -->
+		<!-- <cache readOnly="true"/> -->
+	</settings>
+</configuration>

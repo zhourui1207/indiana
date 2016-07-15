@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	metadata-complete="true"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee/ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>Archetype Created Web Application</display-name>
+
+	<!-- Spring 服务层的配置文件 -->
+	<!--如果不定义webAppRootKey参数，那么webAppRootKey就是缺省的"webapp.root",这个属性由 org.springframework.web.util.Log4jConfigListener 
+		侦听器读取 -->
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>webapp.root</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/log4j.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/application*.xml</param-value>
+	</context-param>
+
+	<!-- resteasy 环境配置 -->
+	<!-- 这版本无效，不知道为什么，只能手动添加了<context-param> <param-name>resteasy.scan</param-name> 
+		<param-value>true</param-value> </context-param> -->
+	<context-param>
+		<param-name>resteasy.servlet.mapping.prefix</param-name>
+		<param-value>/api</param-value>
+	</context-param>
+
+	<!-- web一启动，就会开启listener中类的侦听，Spring 容器启动监听器, Spring需要控制bean -->
+	<!-- 启动这个spring log4j的侦听器，webapp.root的值才会被读到，使用这个能把服务启动过程的日志也打印出来 -->
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- resteasy启动初始化监听器 单独时 servlet3.0 不需要用这个 与spring整合时需要 -->
+	<!-- <listener> <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class> 
+		</listener> -->
+
+	<!-- 过滤器在程序启动时就会进行初始化，并且在请求到 servlet 前先调用 filter 类方法，必须实现 javax.servlet.Filter 
+		do接口, 执行到 chain.doFilter 方法前执行 servlet 方法，当servlet 方法执行完后在从 chain.doFilter 
+		方法下面继续执行，如果没有 chain.doFilter 那么此请求被过滤， 不再被处理, 调用servlet前顺序执行，调用serlvet后逆序执行 -->
+
+	<!-- 字符集编码过滤器，强制转码成utf-8 -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 当有请求时，才会调用servlet中类的方法，这些类必须要实现 javax.servlet.Servlet 接口 -->
+	<!-- Resteasy -->
+	<servlet>
+		<servlet-name>Resteasy</servlet-name>
+		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>com.jxlianlian.rest.application.RestApplication</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Resteasy</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<!-- Default to 5 minute session timeouts -->
+		<session-timeout>10</session-timeout>
+	</session-config>
+
+</web-app>

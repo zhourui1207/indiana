@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxlianlian.spring.mybatis.dao.ShoppingRecordMapper">
+  <!-- Cache 配置 -->  
+  <cache eviction="LRU" flushInterval="3600000" size="102400"/> 
+	<resultMap id="BaseResultMap"
+		type="com.jxlianlian.spring.mybatis.model.ShoppingRecord">
+		<id column="shopping_record_id" property="shoppingRecordId"
+			jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="head" property="head" jdbcType="VARCHAR" />
+		<result column="location" property="location" jdbcType="VARCHAR" />
+		<result column="ip_address" property="ipAddress" jdbcType="VARCHAR" />
+		<result column="buy_count" property="buyCount" jdbcType="BIGINT" />
+		<result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+		<result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+		<result column="goods_template_id" property="goodsTemplateId"
+			jdbcType="BIGINT" />
+		<result column="period" property="period" jdbcType="BIGINT" />
+		<result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+		<result column="little_pic" property="littlePic" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		shopping_record_id, user_id, user_name, head, location, ip_address, buy_count,
+		insert_time,
+		goods_id, goods_template_id, period, goods_name, little_pic
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from shopping_record
+		where shopping_record_id = #{shoppingRecordId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from shopping_record
+		where shopping_record_id = #{shoppingRecordId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.ShoppingRecord">
+		insert into shopping_record (shopping_record_id, user_id, user_name,
+		head, location, ip_address,
+		buy_count, insert_time, goods_id,
+		goods_template_id, period, goods_name,
+		little_pic)
+		values (#{shoppingRecordId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+		#{userName,jdbcType=VARCHAR},
+		#{head,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR},
+		#{buyCount,jdbcType=BIGINT}, #{insertTime,jdbcType=TIMESTAMP},
+		#{goodsId,jdbcType=BIGINT},
+		#{goodsTemplateId,jdbcType=BIGINT}, #{period,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR},
+		#{littlePic,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.jxlianlian.spring.mybatis.model.ShoppingRecord">
+		insert into shopping_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="shoppingRecordId != null">
+				shopping_record_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="head != null">
+				head,
+			</if>
+			<if test="location != null">
+				location,
+			</if>
+			<if test="ipAddress != null">
+				ip_address,
+			</if>
+			<if test="buyCount != null">
+				buy_count,
+			</if>
+			<if test="insertTime != null">
+				insert_time,
+			</if>
+			<if test="goodsId != null">
+				goods_id,
+			</if>
+			<if test="goodsTemplateId != null">
+				goods_template_id,
+			</if>
+			<if test="period != null">
+				period,
+			</if>
+			<if test="goodsName != null">
+				goods_name,
+			</if>
+			<if test="littlePic != null">
+				little_pic,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="shoppingRecordId != null">
+				#{shoppingRecordId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="head != null">
+				#{head,jdbcType=VARCHAR},
+			</if>
+			<if test="location != null">
+				#{location,jdbcType=VARCHAR},
+			</if>
+			<if test="ipAddress != null">
+				#{ipAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="buyCount != null">
+				#{buyCount,jdbcType=BIGINT},
+			</if>
+			<if test="insertTime != null">
+				#{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="goodsId != null">
+				#{goodsId,jdbcType=BIGINT},
+			</if>
+			<if test="goodsTemplateId != null">
+				#{goodsTemplateId,jdbcType=BIGINT},
+			</if>
+			<if test="period != null">
+				#{period,jdbcType=BIGINT},
+			</if>
+			<if test="goodsName != null">
+				#{goodsName,jdbcType=VARCHAR},
+			</if>
+			<if test="littlePic != null">
+				#{littlePic,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.jxlianlian.spring.mybatis.model.ShoppingRecord">
+		update shopping_record
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="head != null">
+				head = #{head,jdbcType=VARCHAR},
+			</if>
+			<if test="location != null">
+				location = #{location,jdbcType=VARCHAR},
+			</if>
+			<if test="ipAddress != null">
+				ip_address = #{ipAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="buyCount != null">
+				buy_count = #{buyCount,jdbcType=BIGINT},
+			</if>
+			<if test="insertTime != null">
+				insert_time = #{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="goodsId != null">
+				goods_id = #{goodsId,jdbcType=BIGINT},
+			</if>
+			<if test="goodsTemplateId != null">
+				goods_template_id = #{goodsTemplateId,jdbcType=BIGINT},
+			</if>
+			<if test="period != null">
+				period = #{period,jdbcType=BIGINT},
+			</if>
+			<if test="goodsName != null">
+				goods_name = #{goodsName,jdbcType=VARCHAR},
+			</if>
+			<if test="littlePic != null">
+				little_pic = #{littlePic,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where shopping_record_id = #{shoppingRecordId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.ShoppingRecord">
+		update shopping_record
+		set user_id = #{userId,jdbcType=BIGINT},
+		user_name = #{userName,jdbcType=VARCHAR},
+		head = #{head,jdbcType=VARCHAR},
+		location = #{location,jdbcType=VARCHAR},
+		ip_address = #{ipAddress,jdbcType=VARCHAR},
+		buy_count = #{buyCount,jdbcType=BIGINT},
+		insert_time = #{insertTime,jdbcType=TIMESTAMP},
+		goods_id = #{goodsId,jdbcType=BIGINT},
+		goods_template_id = #{goodsTemplateId,jdbcType=BIGINT},
+		period = #{period,jdbcType=BIGINT},
+		goods_name = #{goodsName,jdbcType=VARCHAR},
+		little_pic = #{littlePic,jdbcType=VARCHAR}
+		where shopping_record_id = #{shoppingRecordId,jdbcType=BIGINT}
+	</update>
+</mapper>

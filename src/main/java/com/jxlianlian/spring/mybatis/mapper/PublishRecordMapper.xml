@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxlianlian.spring.mybatis.dao.PublishRecordMapper">
+  <!-- Cache 配置 -->  
+  <cache eviction="FIFO" flushInterval="3600000" size="1024"/>
+	<resultMap id="BaseResultMap"
+		type="com.jxlianlian.spring.mybatis.model.PublishRecord">
+		<id column="publish_record_id" property="publishRecordId" jdbcType="BIGINT" />
+		<result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+		<result column="goods_template_id" property="goodsTemplateId"
+			jdbcType="BIGINT" />
+		<result column="period" property="period" jdbcType="BIGINT" />
+		<result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+		<result column="little_pic" property="littlePic" jdbcType="VARCHAR" />
+		<result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+		<result column="expect_publish_time" property="expectPublishTime"
+			jdbcType="TIMESTAMP" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="location" property="location" jdbcType="VARCHAR" />
+		<result column="head" property="head" jdbcType="VARCHAR" />
+		<result column="total" property="total" jdbcType="BIGINT" />
+		<result column="buy_count" property="buyCount" jdbcType="VARCHAR" />
+		<result column="lucky_number" property="luckyNumber" jdbcType="VARCHAR" />
+		<result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+		<result column="lucky_time" property="luckyTime" jdbcType="TIMESTAMP" />
+		<result column="calculation_detail_id" property="calculationDetailId"
+			jdbcType="INTEGER" />
+		<result column="publish_record_detail_id" property="publishRecordDetailId"
+			jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		publish_record_id, goods_id, goods_template_id, period, goods_name, little_pic,
+		insert_time,
+		expect_publish_time, user_id, user_name, location, head, total, buy_count, lucky_number,
+		publish_time, lucky_time, calculation_detail_id,
+		publish_record_detail_id
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from publish_record
+		where publish_record_id = #{publishRecordId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from publish_record
+		where publish_record_id = #{publishRecordId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.PublishRecord">
+		insert into publish_record (publish_record_id, goods_id,
+		goods_template_id,
+		period, goods_name, little_pic,
+		insert_time, expect_publish_time, user_id,
+		user_name, location, head,
+		total, buy_count, lucky_number,
+		publish_time, lucky_time, calculation_detail_id,
+		publish_record_detail_id)
+		values (#{publishRecordId,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT},
+		#{goodsTemplateId,jdbcType=BIGINT},
+		#{period,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, #{littlePic,jdbcType=VARCHAR},
+		#{insertTime,jdbcType=TIMESTAMP},
+		#{expectPublishTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=BIGINT},
+		#{userName,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR},
+		#{head,jdbcType=VARCHAR},
+		#{total,jdbcType=BIGINT}, #{buyCount,jdbcType=VARCHAR}, #{luckyNumber,jdbcType=VARCHAR},
+		#{publishTime,jdbcType=TIMESTAMP}, #{luckyTime,jdbcType=TIMESTAMP},
+		#{calculationDetailId,jdbcType=INTEGER},
+		#{publishRecordDetailId,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.jxlianlian.spring.mybatis.model.PublishRecord">
+		insert into publish_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="publishRecordId != null">
+				publish_record_id,
+			</if>
+			<if test="goodsId != null">
+				goods_id,
+			</if>
+			<if test="goodsTemplateId != null">
+				goods_template_id,
+			</if>
+			<if test="period != null">
+				period,
+			</if>
+			<if test="goodsName != null">
+				goods_name,
+			</if>
+			<if test="littlePic != null">
+				little_pic,
+			</if>
+			<if test="insertTime != null">
+				insert_time,
+			</if>
+			<if test="expectPublishTime != null">
+				expect_publish_time,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="location != null">
+				location,
+			</if>
+			<if test="head != null">
+				head,
+			</if>
+			<if test="total != null">
+				total,
+			</if>
+			<if test="buyCount != null">
+				buy_count,
+			</if>
+			<if test="luckyNumber != null">
+				lucky_number,
+			</if>
+			<if test="publishTime != null">
+				publish_time,
+			</if>
+			<if test="luckyTime != null">
+				lucky_time,
+			</if>
+			<if test="calculationDetailId != null">
+				calculation_detail_id,
+			</if>
+			<if test="publishRecordDetailId != null">
+				publish_record_detail_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="publishRecordId != null">
+				#{publishRecordId,jdbcType=BIGINT},
+			</if>
+			<if test="goodsId != null">
+				#{goodsId,jdbcType=BIGINT},
+			</if>
+			<if test="goodsTemplateId != null">
+				#{goodsTemplateId,jdbcType=BIGINT},
+			</if>
+			<if test="period != null">
+				#{period,jdbcType=BIGINT},
+			</if>
+			<if test="goodsName != null">
+				#{goodsName,jdbcType=VARCHAR},
+			</if>
+			<if test="littlePic != null">
+				#{littlePic,jdbcType=VARCHAR},
+			</if>
+			<if test="insertTime != null">
+				#{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="expectPublishTime != null">
+				#{expectPublishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="location != null">
+				#{location,jdbcType=VARCHAR},
+			</if>
+			<if test="head != null">
+				#{head,jdbcType=VARCHAR},
+			</if>
+			<if test="total != null">
+				#{total,jdbcType=BIGINT},
+			</if>
+			<if test="buyCount != null">
+				#{buyCount,jdbcType=VARCHAR},
+			</if>
+			<if test="luckyNumber != null">
+				#{luckyNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="publishTime != null">
+				#{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="luckyTime != null">
+				#{luckyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="calculationDetailId != null">
+				#{calculationDetailId,jdbcType=INTEGER},
+			</if>
+			<if test="publishRecordDetailId != null">
+				#{publishRecordDetailId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.jxlianlian.spring.mybatis.model.PublishRecord">
+		update publish_record
+		<set>
+			<if test="goodsId != null">
+				goods_id = #{goodsId,jdbcType=BIGINT},
+			</if>
+			<if test="goodsTemplateId != null">
+				goods_template_id = #{goodsTemplateId,jdbcType=BIGINT},
+			</if>
+			<if test="period != null">
+				period = #{period,jdbcType=BIGINT},
+			</if>
+			<if test="goodsName != null">
+				goods_name = #{goodsName,jdbcType=VARCHAR},
+			</if>
+			<if test="littlePic != null">
+				little_pic = #{littlePic,jdbcType=VARCHAR},
+			</if>
+			<if test="insertTime != null">
+				insert_time = #{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="expectPublishTime != null">
+				expect_publish_time = #{expectPublishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="location != null">
+				location = #{location,jdbcType=VARCHAR},
+			</if>
+			<if test="head != null">
+				head = #{head,jdbcType=VARCHAR},
+			</if>
+			<if test="total != null">
+				total = #{total,jdbcType=BIGINT},
+			</if>
+			<if test="buyCount != null">
+				buy_count = #{buyCount,jdbcType=VARCHAR},
+			</if>
+			<if test="luckyNumber != null">
+				lucky_number = #{luckyNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="publishTime != null">
+				publish_time = #{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="luckyTime != null">
+				lucky_time = #{luckyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="calculationDetailId != null">
+				calculation_detail_id = #{calculationDetailId,jdbcType=INTEGER},
+			</if>
+			<if test="publishRecordDetailId != null">
+				publish_record_detail_id = #{publishRecordDetailId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where publish_record_id = #{publishRecordId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.PublishRecord">
+		update publish_record
+		set goods_id = #{goodsId,jdbcType=BIGINT},
+		goods_template_id = #{goodsTemplateId,jdbcType=BIGINT},
+		period = #{period,jdbcType=BIGINT},
+		goods_name = #{goodsName,jdbcType=VARCHAR},
+		little_pic = #{littlePic,jdbcType=VARCHAR},
+		insert_time = #{insertTime,jdbcType=TIMESTAMP},
+		expect_publish_time = #{expectPublishTime,jdbcType=TIMESTAMP},
+		user_id = #{userId,jdbcType=BIGINT},
+		user_name = #{userName,jdbcType=VARCHAR},
+		location = #{location,jdbcType=VARCHAR},
+		head = #{head,jdbcType=VARCHAR},
+		total = #{total,jdbcType=BIGINT},
+		buy_count = #{buyCount,jdbcType=VARCHAR},
+		lucky_number = #{luckyNumber,jdbcType=VARCHAR},
+		publish_time = #{publishTime,jdbcType=TIMESTAMP},
+		lucky_time = #{luckyTime,jdbcType=TIMESTAMP},
+		calculation_detail_id = #{calculationDetailId,jdbcType=INTEGER},
+		publish_record_detail_id = #{publishRecordDetailId,jdbcType=BIGINT}
+		where publish_record_id = #{publishRecordId,jdbcType=BIGINT}
+	</update>
+</mapper>
