@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
+import com.jxlianlian.common.Const;
+
 public class User implements Serializable {
 
   /**
@@ -58,6 +62,17 @@ public class User implements Serializable {
   private String signature;
   
   private Byte closeDown;
+  
+  private Integer verityCode;  // 验证码，这个只是短信验证的时候用的
+  
+  private Long sendVerityCodeTime;  // 验证码发送时间
+  
+  public void initByUserAccount(String userAccount, String userPassword, Byte way) { 
+    this.userAccount = userAccount;
+    this.userPassword = DigestUtils.md5Hex(userPassword);
+    this.way = way;
+    birthday = new Date();
+  }
 
   public Long getUserId() {
     return userId;
@@ -249,6 +264,22 @@ public class User implements Serializable {
 
   public void setCloseDown(Byte closeDown) {
     this.closeDown = closeDown;
+  }
+
+  public Integer getVerityCode() {
+    return verityCode;
+  }
+
+  public void setVerityCode(Integer verityCode) {
+    this.verityCode = verityCode;
+  }
+
+  public Long getSendVerityCodeTime() {
+    return sendVerityCodeTime;
+  }
+
+  public void setSendVerityCodeTime(Long sendVerityCodeTime) {
+    this.sendVerityCodeTime = sendVerityCodeTime;
   }
 
   @Override

@@ -1,5 +1,6 @@
 package com.jxlianlian.util;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -69,6 +70,8 @@ public final class JsonUtil {
       objectMapper = new ObjectMapper();
     }
 
+    objectMapper.setSerializationInclusion(Include.NON_NULL);  // 过滤空值
+    
     try {
       return objectMapper.writeValueAsString(object);
     } catch (Exception e) {

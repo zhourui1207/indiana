@@ -14,15 +14,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 
 public class KeyUtil {
-  
   //生成HS512秘钥，保存在file
-  public static Key generateKey(String secret) {
+  public static Key generateKey(SignatureAlgorithm alg, String secret) {
     String md5 = DigestUtils.md5Hex(secret);
-    return new SecretKeySpec(md5.getBytes(), SignatureAlgorithm.HS512.getJcaName());
+    return new SecretKeySpec(md5.getBytes(), alg.getJcaName());
   }
 
   public static void main(String[] args) {
-    Key key = generateKey("jxlianlian_zhourui");
+    Key key = generateKey(SignatureAlgorithm.HS512, "jxlianlian.zhourui");
     String encoded = "";
     try {
       encoded = new String(key.getEncoded(),"UTF-8");

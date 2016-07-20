@@ -32,15 +32,31 @@
 	<!-- web一启动，就会开启listener中类的侦听，Spring 容器启动监听器, Spring需要控制bean -->
 	<!-- 启动这个spring log4j的侦听器，webapp.root的值才会被读到，使用这个能把服务启动过程的日志也打印出来 -->
 	<listener>
-		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+		<listener-class>org.springframework.web.util.Log4jConfigListener
+		</listener-class>
 	</listener>
 
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+	<!-- Start Resteasy -->
 	<!-- resteasy启动初始化监听器 单独时 servlet3.0 不需要用这个 与spring整合时需要 -->
-	<!-- <listener> <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class> 
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+		</listener-class>
+	</listener>
+	<!-- load Spring Context -->
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.spring.SpringContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<!-- spring和resteasy整合时，只需要上面的SpringContextLoaderListener就可以了 -->
+	<!-- <listener> <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
 		</listener> -->
+
+	<!-- 防止Spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener
+		</listener-class>
+	</listener>
 
 	<!-- 过滤器在程序启动时就会进行初始化，并且在请求到 servlet 前先调用 filter 类方法，必须实现 javax.servlet.Filter 
 		do接口, 执行到 chain.doFilter 方法前执行 servlet 方法，当servlet 方法执行完后在从 chain.doFilter 
@@ -49,7 +65,8 @@
 	<!-- 字符集编码过滤器，强制转码成utf-8 -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>utf-8</param-value>
@@ -64,16 +81,39 @@
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- XXS过滤器 -->
+  <filter>
+    <filter-name>XssFilter</filter-name>
+    <filter-class>com.jxlianlian.filter.XssFilter
+    </filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>XssFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+	<!-- 开启支持PUT DELETE 等请求方法 -->
+	<filter>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+	</filter-mapping>
 
 	<!-- 当有请求时，才会调用servlet中类的方法，这些类必须要实现 javax.servlet.Servlet 接口 -->
-	<!-- Resteasy -->
+	<!-- Resteasy 跟Spring整合后 这个配置就没用了 -->
 	<servlet>
 		<servlet-name>Resteasy</servlet-name>
-		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
-		<init-param>
-			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>com.jxlianlian.rest.application.RestApplication</param-value>
-		</init-param>
+		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+		</servlet-class>
+		<!-- 由于采用与spring整合，注解注入方式，所以不需要配置Application了 -->
+		<!-- <init-param> <param-name>javax.ws.rs.Application</param-name> <param-value>com.jxlianlian.spring.rest.application.RestApplication</param-value> 
+			</init-param> -->
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Resteasy</servlet-name>

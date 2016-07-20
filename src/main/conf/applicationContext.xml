@@ -1,96 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-            http://www.springframework.org/schema/aop
-            http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
-            http://www.springframework.org/schema/mvc
-            http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
-            http://www.springframework.org/schema/tx
-            http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
-            http://www.springframework.org/schema/util
-            http://www.springframework.org/schema/util/spring-util-3.2.xsd
-            http://www.springframework.org/schema/context
-            http://www.springframework.org/schema/context/spring-context-3.2.xsd
-            http://www.springframework.org/schema/jdbc
-            http://www.springframework.org/schema/context/spring-jdbc-3.2.xsd
-            http://www.springframework.org/schema/cache
-            http://www.springframework.org/schema/context/spring-cache-3.2.xsd">
-
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd    
+	http://www.springframework.org/schema/task 
+  http://www.springframework.org/schema/task/spring-task-4.3.xsd
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+  >
+	
 	<!-- spring的自动查找bean功能 @Repository、@Service、@Controller， 它们分别对应存储层Bean dao，业务层Bean 
-		service，和展示层Bean controller-servlet -->
-	<context:component-scan base-package="com.jxlianlian.spring" />
-
-	<!-- 加载配置文件 -->
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:jdbc.properties" />
-	</bean>
-	<!-- 数据库连接池管理 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${mysql.driverClassName}" />
-		<property name="url" value="${mysql.url}" />
-		<property name="username" value="${mysql.username}" />
-		<property name="password" value="${mysql.password}" />
-		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="${mysql.initialSize}" />
-		<!-- 连接池最大数量 -->
-		<property name="maxActive" value="${mysql.maxActive}" />
-		<!-- 连接池最大空闲 -->
-		<property name="maxIdle" value="${mysql.maxIdle}" />
-		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="${mysql.minIdle}" />
-		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="${mysql.maxWait}" />
-	</bean>
-	<!-- pring和MyBatis完美整合，不需要mybatis的配置映射文件 这里的id名不能为sqlSessionFactory, 不然会出现这个bean过早初始化，到时jdbc的Integer属性还没被转成String而报错 -->
-	<bean id="mySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:myBatisConf.xml" />
-		<!-- 自动扫描mapper.xml文件 -->
-		<property name="mapperLocations"
-			value="classpath:com/jxlianlian/spring/mybatis/mapper/*Mapper.xml" />
-	</bean>
-	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.jxlianlian.spring.mybatis.dao" />
-		<property name="sqlSessionFactoryBeanName" value="mySqlSessionFactory" />
-	</bean>
-	<!-- 配置事务管理器 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	<!-- 拦截器方式配置事物 -->
-	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-			<tx:method name="insert*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="set*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-			<tx:method name="modify*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="update*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="delete*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="find*" propagation="SUPPORTS" />
-			<tx:method name="query*" propagation="SUPPORTS" />
-			<tx:method name="search*" propagation="SUPPORTS" />
-			<tx:method name="get*" propagation="SUPPORTS" />
-			<tx:method name="select*" propagation="SUPPORTS" />
-			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
-		</tx:attributes>
-	</tx:advice>
-	<aop:config>
-		<aop:pointcut id="transactionPointcut"
-			expression="execution(* com.jxlianlian.spring.service.*.*(..))" />
-		<aop:advisor pointcut-ref="transactionPointcut"
-			advice-ref="transactionAdvice" />
-	</aop:config>
-</beans> 
+    service，和展示层Bean controller-servlet -->
+  <context:component-scan base-package="com.jxlianlian.spring" />
+ 
+	<task:annotation-driven/>  
+</beans>

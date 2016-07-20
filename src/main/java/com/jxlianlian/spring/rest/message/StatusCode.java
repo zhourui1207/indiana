@@ -1,4 +1,4 @@
-package com.jxlianlian.rest.message;
+package com.jxlianlian.spring.rest.message;
 
 /*
  * 消息返回状态码

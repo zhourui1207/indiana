@@ -15,6 +15,8 @@ public interface UserMapper {
   
   User selectByUserIdSelf(Long userId);
   
+  User selectByUserAccountToLogin(String userAccount);
+  
   User selectByUserAccount(String userAccount);
   
   User selectByWxId(String wxId);
