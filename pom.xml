@@ -236,7 +236,19 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${org.hibernate.version}</version>
 		</dependency>
-
+		
+		<!-- jcaptcha -->
+		<dependency>
+		  <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.0</version>
+		</dependency>
+    <dependency>
+      <groupId>com.octo.captcha</groupId>
+      <artifactId>jcaptcha-api</artifactId>
+      <version>1.0</version>
+    </dependency>
+		
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

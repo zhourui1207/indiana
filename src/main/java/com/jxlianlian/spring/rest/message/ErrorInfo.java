@@ -4,6 +4,7 @@ public class ErrorInfo {
   public static String NO_AUTHORIZED = "没有权限";
   public static String USER_NO_EXISTED = "用户不存在";
   public static String USER_EXISTED = "用户已存在";
+  public static String VERITY_CODE_INCORRECT = "验证码错误";
   public static String MUST_USE_HTTPS = "高安全API必须使用HTTPS协议";
   public static String USERNAME_OR_PASSWORD_INCORRECT = "用户名或密码不正确";
   public static String PHONE_INCORRECT = "请使用正确的手机号";

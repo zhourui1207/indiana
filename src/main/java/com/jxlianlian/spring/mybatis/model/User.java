@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.util.StringUtils;
 
 import com.jxlianlian.common.Const;
 
@@ -70,6 +71,9 @@ public class User implements Serializable {
   public void initByUserAccount(String userAccount, String userPassword, Byte way) { 
     this.userAccount = userAccount;
     this.userPassword = DigestUtils.md5Hex(userPassword);
+    String userNameSrc = userAccount;
+    String hideNo = userNameSrc.substring(3, 7);
+    this.userName = StringUtils.replace(userNameSrc, hideNo, "****");
     this.way = way;
     birthday = new Date();
   }

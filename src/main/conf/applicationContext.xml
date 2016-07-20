@@ -15,5 +15,5 @@
     service，和展示层Bean controller-servlet -->
   <context:component-scan base-package="com.jxlianlian.spring" />
  
-	<task:annotation-driven/>  
+	<task:annotation-driven/>
 </beans>

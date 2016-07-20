@@ -20,6 +20,16 @@ public class CacheData {
     }
   }
   
+  public static User checkSmsVerityCode(String userAccount, Integer verityCode) {
+    synchronized (usersMutex) {
+      User user = users.get(userAccount);
+      if (user != null && user.getVerityCode().equals(verityCode)) {
+        return users.remove(userAccount);
+      }
+    }
+    return null;
+  }
+  
   public static void clearSmsVerityCode() {
     synchronized (usersMutex) {
       Iterator<Entry<String, User>> usersIterator = users.entrySet().iterator();

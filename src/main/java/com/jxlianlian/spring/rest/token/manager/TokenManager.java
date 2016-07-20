@@ -19,8 +19,8 @@ public class TokenManager {
     jwtBuilder.setSubject("" + userId);
     long exp = isPhone ? Const.JWT_PHONE_EXP : Const.JWT_WEB_EXP;
     jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + exp));
-    jwtBuilder.claim(Const.USER_TYPE, userType);
-    jwtBuilder.claim(Const.IS_PHONE, isPhone);
+    jwtBuilder.claim(Const.P_USER_TYPE, userType);
+    jwtBuilder.claim(Const.P_IS_PHONE, isPhone);
     return jwtBuilder.signWith(TokenKey.KEY_ALG, TokenKey.SECRET_KEY).compact();
   }
 
@@ -31,8 +31,8 @@ public class TokenManager {
     String issuer = claims.getIssuer();
     long expTime = claims.getExpiration().getTime();
     if (issuer.equals(Const.JWT_ISS) && expTime > System.currentTimeMillis()) {
-      return new Token(Long.parseLong(claims.getSubject()), expTime, (int) claims.get(Const.USER_TYPE),
-          (boolean) claims.get(Const.IS_PHONE));
+      return new Token(Long.parseLong(claims.getSubject()), expTime, (int) claims.get(Const.P_USER_TYPE),
+          (boolean) claims.get(Const.P_IS_PHONE));
     }
     return null;
   }

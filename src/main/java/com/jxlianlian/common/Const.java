@@ -20,14 +20,17 @@ public final class Const {
   public static final long JWT_PHONE_EXP = 172800000L;  // phone 过期时间48小时
   public static final long JWT_PHONE_RECREATE_TIME = 43200000L;  // phone 过期时间12小时
   
-  // JWT解析后加入的当前用户ID
+  // JWT解析后加入的当前用户ID和用户类型
   public static final String CURRENT_USER_ID = "currentUserId";
+  public static final String CURRENT_USER_TYPE = "currentUserType";
   
-  // 与客户端同意的参数名
-  public static final String USER_TYPE = "userType";
-  public static final String IS_PHONE = "isPhone";
-  public static final String USER_ACCOUNT = "userAccount";
-  public static final String USER_PASSWORD = "userPassword";
+  // 与客户端统一的参数名
+  public static final String P_USER_TYPE = "userType";
+  public static final String P_IS_PHONE = "isPhone";
+  public static final String P_USER_ACCOUNT = "userAccount";
+  public static final String P_USER_PASSWORD = "userPassword";
+  public static final String P_SMS_VERITY_CODE = "smsVerityCode";
+  public static final String P_JCAPTCHA = "jcaptcha";
   
   // 用户注册方式
   public static final Byte WAY_PHONE = 0;
@@ -46,7 +49,7 @@ public final class Const {
   public static final String SMS_TEMPLATE_CODE_NOTIFY = "SMS_12335355";
   
   // REST API 版本
-  public static final String API_VERSION = "1";
+  public static final String API_VERSION = "/1/";
   
   // 默认查询普通记录页面大小
   public static final int PAG_SIZE_DEFAULE_WEB = 50;

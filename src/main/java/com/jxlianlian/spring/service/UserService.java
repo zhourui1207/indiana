@@ -54,12 +54,12 @@ public class UserService {
     // 查询用户是否存在
     User u = userDao.selectByUserAccount(user.getUserAccount());
     if (u == null) {  // 不在存在用户才能新增
-      return userDao.insert(user);
+      return userDao.insertSelective(user);
     }
     return 0;
   }
   
   public int addUser(User user) throws Exception {
-    return userDao.insert(user);
+    return userDao.insertSelective(user);
   }
 }

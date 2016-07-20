@@ -32,5 +32,8 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/taobao-sdk-java-auto_1455552377940-20160714-source.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/taobao-sdk-java-auto_1455552377940-20160714.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/filters-2.0.235.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jcaptcha-2.0-alpha-1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jcaptcha-integration-simple-servlet-2.0-alpha-1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

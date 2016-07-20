@@ -26,7 +26,7 @@ import com.jxlianlian.spring.service.UserService;
 import com.jxlianlian.util.ResponseUtil;
 
 @Controller
-@Path("/" + Const.API_VERSION + "/token")
+@Path(Const.API_VERSION + "token")
 @Produces(MediaType.APPLICATION_JSON)
 public class TokenApi {
   private Logger logger = Logger.getLogger(TokenApi.class);
@@ -38,12 +38,12 @@ public class TokenApi {
   @POST
   @Path("/")
   //@MustHttps  // 调试时关闭
-  public Response postToken(@FormParam(Const.USER_ACCOUNT) String userAccount,
-      @FormParam(Const.USER_PASSWORD) String userPassword,
-      @FormParam(Const.IS_PHONE) @DefaultValue("false") boolean isPhone) {
+  public Response login(@FormParam(Const.P_USER_ACCOUNT) String userAccount,
+      @FormParam(Const.P_USER_PASSWORD) String userPassword,
+      @FormParam(Const.P_IS_PHONE) @DefaultValue("false") boolean isPhone) {
 
     logger
-        .info("postToken(userAccount=" + userAccount + ", userPassword=" + userPassword + ", isPhone=" + isPhone + ")");
+        .info("login(userAccount=" + userAccount + ", userPassword=" + userPassword + ", isPhone=" + isPhone + ")");
 
     // 判断是否是null或空字符串
     if (userAccount == null || userPassword == null || userAccount.length() == 0 || userPassword.length() == 0) {
@@ -76,7 +76,7 @@ public class TokenApi {
   // todo:暂时不提供该方法，因为本地并没有存放token的信息
   //@DELETE
   //@Path("/")
-  public Response deleteToken() {
+  public Response logout() {
     return null;
   }
 
