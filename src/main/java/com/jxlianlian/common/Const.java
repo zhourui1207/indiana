@@ -41,7 +41,7 @@ public final class Const {
   public static final String SMS_TYPE = "normal";
   public static final String SMS_SIGN_NAME = "惊喜连连";
   public static final String SMS_PRODUCT = "惊喜连连";
-  public static final int SMS_VERIFY_TIME = 1;
+  public static final int SMS_VERIFY_TIME = 10;
   public static final String SMS_TEMPLATE_CODE_VERIFY = "SMS_12335361";
   public static final String SMS_TEMPLATE_CODE_NOTIFY = "SMS_12335355";
   
