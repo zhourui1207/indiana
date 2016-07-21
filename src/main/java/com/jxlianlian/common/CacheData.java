@@ -14,6 +14,12 @@ public class CacheData {
   private static Map<String, User> users = new HashMap<>();
   private static Object usersMutex = new Object();
   
+  // 调用阿里图片验证接口
+  // 调用开关
+  private static boolean useAliVerityCode = true;
+  // 记录服务端验证调用次数
+  private static int useAliVerityCodeCount = 0;
+  
   public static void addSmsVerityCode(User user) {
     synchronized (usersMutex) {
       users.put(user.getUserAccount(), user);
@@ -42,5 +48,25 @@ public class CacheData {
         }
       } 
     }
+  }
+  
+  // 是否使用阿里验证码接口
+  public static boolean useAliVerityCode() {
+    if (useAliVerityCode) {
+      ++useAliVerityCodeCount;
+    }
+    return useAliVerityCode;
+  }
+  
+  // 禁用阿里验证码接口
+  public static void closeDownAliVerityCode() {
+    useAliVerityCode = false;
+  }
+  
+  // 重置阿里验证码接口
+  public static void resetAliVerityCode() {
+    useAliVerityCode = true;
+    logger.info("重置阿里图片验证接口，昨日服务端验证次数=" + useAliVerityCodeCount);
+    useAliVerityCodeCount = 0;
   }
 }

@@ -5,6 +5,7 @@ public final class Const {
   public static final boolean IS_TEST = true;
   
   // Spring定时任务执行计划
+  public static final String TASK_NEW_DAY_BEGIN = "0 0 0 * * ?";  // 每天00：00执行一次
   public static final String TASK_CLENR_SMS_VERITY_CODE = "0/10 * *  * * ? ";  // 每10秒执行一次
   
   // JWT秘钥
@@ -47,6 +48,16 @@ public final class Const {
   public static final int SMS_VERIFY_TIME = 10;
   public static final String SMS_TEMPLATE_CODE_VERIFY = "SMS_12335361";
   public static final String SMS_TEMPLATE_CODE_NOTIFY = "SMS_12335355";
+  
+  // 阿里滑动验证码模块，条用阿里云接口
+  public static final String ALIYUN_ACCESS_KEY_ID = "CPF5Bjx0rEm1oM5v";
+  public static final String ALIYUN_ACCESS_KEY_SECRET = "VDWgaQaF5DAwe7dnCdgWDWf4RkkEpy";
+  public static final String ALIYUN_APP_KEY = "9YQA";
+  public static final String ALIYUN_APP_ACCESS_KEY = "W5TU6FDYA9V3AGU6YUJWX58MDPHZYZQI";
+  public static final String ALIYUN_TOKEN = "token";
+  public static final String ALIYUN_SESSIONID = "csessionid";
+  public static final String ALIYUN_SIG = "sig";
+  public static final String ALIYUN_SCENE = "scene";
   
   // REST API 版本
   public static final String API_VERSION = "/1/";

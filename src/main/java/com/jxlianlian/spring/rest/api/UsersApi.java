@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jxlianlian.common.CacheData;
 import com.jxlianlian.common.Const;
 import com.jxlianlian.spring.rest.filter.Authorization;
 import com.jxlianlian.spring.rest.filter.MustHttps;
@@ -18,9 +19,11 @@ import com.jxlianlian.spring.mybatis.model.User;
 import com.jxlianlian.spring.context.SpringContext;
 import com.jxlianlian.spring.manager.SmsManager;
 import com.jxlianlian.spring.service.UserService;
+import com.jxlianlian.util.IpUtil;
 import com.jxlianlian.util.JsonUtil;
 import com.jxlianlian.util.RegexUtil;
 import com.jxlianlian.util.ResponseUtil;
+import com.jxlianlian.util.SigAuthUtil;
 import com.octo.captcha.module.servlet.image.SimpleImageCaptchaServlet;
 
 import javax.ws.rs.core.Context;
@@ -71,35 +74,45 @@ public class UsersApi {
     return user;
   }
 
-  private User queryUserByUserAccount(String userAccount) {
-    User user = null;
-    try {
-      user = userService.queryUserByUserAccount(userAccount);
-    } catch (Exception e) {
-      logger.error("queryUserByUserAccount failed! userAccount=" + userAccount, e);
-    }
-    return user;
-  }
 
   // 注册用户
   @POST
   @Path("/")
   // @MustHttps
-  public Response addUser(@FormParam(Const.P_USER_ACCOUNT) String userAccount,
+  public Response registUser(@FormParam(Const.P_USER_ACCOUNT) String userAccount,
       @FormParam(Const.P_USER_PASSWORD) String userPassword, @FormParam(Const.P_JCAPTCHA) String jcaptcha) {
 
     logger
-        .info("addUser(userAccount=" + userAccount + ", userPassword=" + userPassword + ", jcaptcha=" + jcaptcha + ")");
+        .info("registUser(userAccount=" + userAccount + ", userPassword=" + userPassword + ", jcaptcha=" + jcaptcha + ")");
 
-    if (jcaptcha == null || jcaptcha.length() == 0 || userAccount == null || userPassword == null
-        || userAccount.length() == 0 || userPassword.length() == 0) {
+    if (userAccount == null || userPassword == null || userAccount.length() == 0 || userPassword.length() == 0) {
       return ResponseUtil.ResError(StatusCode.INVALID_REQUEST, ErrorInfo.SUBMIT_INCORRECT);
     }
-    
-    // 验证图形验证码
-    boolean captchaPassed = SimpleImageCaptchaServlet.validateResponse(request, jcaptcha);
-    if (!captchaPassed) {
-      return ResponseUtil.ResError(StatusCode.INVALID_REQUEST, ErrorInfo.VERITY_CODE_INCORRECT);
+
+    boolean isPass = false;
+
+    if (CacheData.useAliVerityCode()) { // 是否使用阿里滑动验证码
+      try {
+        isPass = SigAuthUtil.doAuthenticateRequest(request);
+      } catch (Exception e) {
+        // 如果出现Exception ,建议结果为通过.
+        CacheData.closeDownAliVerityCode();  // 异常有可能是每天的免费数量超过上限，禁用阿里验证接口，使用普通验证
+        isPass = true;
+      }
+      if (!isPass) {
+        return ResponseUtil.ResError(StatusCode.INVALID_REQUEST, ErrorInfo.VERITY_CODE_INCORRECT);
+      }
+
+    } else {
+      // 使用jcaptcha图形验证码
+      if (jcaptcha == null || jcaptcha.length() == 0) {
+        return ResponseUtil.ResError(StatusCode.INVALID_REQUEST, ErrorInfo.SUBMIT_INCORRECT);
+      }
+
+      isPass = SimpleImageCaptchaServlet.validateResponse(request, jcaptcha);
+      if (!isPass) {
+        return ResponseUtil.ResError(StatusCode.INVALID_REQUEST, ErrorInfo.VERITY_CODE_INCORRECT);
+      }
     }
 
     if (!RegexUtil.isPhoneNo(userAccount)) { // 不是手机号码
