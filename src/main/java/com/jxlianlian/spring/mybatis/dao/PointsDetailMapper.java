@@ -1,5 +1,7 @@
 package com.jxlianlian.spring.mybatis.dao;
 
+import java.util.List;
+
 import com.jxlianlian.spring.mybatis.model.PointsDetail;
 
 public interface PointsDetailMapper {
@@ -10,6 +12,8 @@ public interface PointsDetailMapper {
   int insertSelective(PointsDetail record);
 
   PointsDetail selectByPrimaryKey(Long pointsDetailId);
+  
+  List<PointsDetail> selectByUserId(Long userId);
 
   int updateByPrimaryKeySelective(PointsDetail record);
 

@@ -22,6 +22,14 @@
 		from points_detail
 		where points_detail_id = #{pointsDetailId,jdbcType=BIGINT}
 	</select>
+	<select id="selectByUserId" resultMap="BaseResultMap"
+    parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from points_detail
+    where user_id = #{userId,jdbcType=BIGINT}
+    order by insert_time desc
+  </select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		delete from points_detail
 		where points_detail_id = #{pointsDetailId,jdbcType=BIGINT}

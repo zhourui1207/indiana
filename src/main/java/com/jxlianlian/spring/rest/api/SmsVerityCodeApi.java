@@ -61,6 +61,6 @@ public class SmsVerityCodeApi {
       return ResponseUtil.ResError(StatusCode.INVALID_REQUEST, ErrorInfo.USER_EXISTED);
     }
 
-    return ResponseUtil.ResOk(null);
+    return ResponseUtil.ResCreateOk(null);
   }
 }

@@ -66,6 +66,10 @@ public final class JsonUtil {
    * @return
    */
   public static String toJSon(Object object) {
+    if (object == null) {
+      return "{}";
+    }
+    
     if (objectMapper == null) {
       objectMapper = new ObjectMapper();
     }
@@ -78,7 +82,7 @@ public final class JsonUtil {
       e.printStackTrace();
     }
 
-    return null;
+    return "{}";
   }
 
 }

@@ -82,17 +82,14 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>${spring.version}</version>
-    </dependency> -->
-    <dependency>
-    <groupId>org.springframework</groupId>
-	    <artifactId>spring-aop</artifactId>
-	    <version>${spring.version}</version>
-    </dependency>
-    
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-webmvc</artifactId> 
+			<version>${spring.version}</version> </dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
 
 		<!-- Resteasy -->
 		<dependency>
@@ -137,11 +134,11 @@
 			<artifactId>resteasy-links</artifactId>
 			<version>${resteasy.version}</version>
 		</dependency>
-		<dependency>  
-        <groupId>org.jboss.resteasy</groupId>  
-        <artifactId>resteasy-spring</artifactId>  
-        <version>${resteasy.version}</version>  
-    </dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-spring</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
 		<!-- Resteasy Server Cache -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
@@ -161,6 +158,18 @@
 			<version>1.2.3</version>
 		</dependency>
 
+		<!-- mybatis分页插件依赖 -->
+		<dependency>
+			<groupId>com.github.jsqlparser</groupId>
+			<artifactId>jsqlparser</artifactId>
+			<version>0.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>4.1.6</version>
+		</dependency>
+
 		<!-- Mysql -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -174,12 +183,11 @@
 		</dependency>
 
 		<!-- MongoDB -->
-		<dependency>
+   <dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
 			<version>${spring-data-mongodb.version}</version>
 		</dependency>
-
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -192,38 +200,19 @@
 			<version>${aspectj.version}</version>
 		</dependency>
 
-		<!-- @Inject -->
-		<!-- <dependency> 
-		  <groupId>javax.inject</groupId> 
-		  <artifactId>javax.inject</artifactId> 
-			<version>1</version> 
-		</dependency> -->
-
-		<!-- JSON -->
-		<!-- <dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${json.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-jaxrs</artifactId>
-			<version>${json.version}</version>
-		</dependency> -->
-		
 		<!-- MD5 -->
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.10</version>
 		</dependency>
-		
+
 		<!-- JWT -->
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt</artifactId>
-      <version>${jjwt.version}</version>
-    </dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
 
 		<!-- javax.validation相关 -->
 		<dependency>
@@ -236,19 +225,19 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${org.hibernate.version}</version>
 		</dependency>
-		
+
 		<!-- jcaptcha -->
 		<dependency>
-		  <groupId>commons-collections</groupId>
-      <artifactId>commons-collections</artifactId>
-      <version>3.0</version>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.0</version>
 		</dependency>
-    <dependency>
-      <groupId>com.octo.captcha</groupId>
-      <artifactId>jcaptcha-api</artifactId>
-      <version>1.0</version>
-    </dependency>
-		
+		<dependency>
+			<groupId>com.octo.captcha</groupId>
+			<artifactId>jcaptcha-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

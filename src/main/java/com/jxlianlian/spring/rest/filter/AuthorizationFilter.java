@@ -41,7 +41,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
   @Override
   public void filter(ContainerRequestContext requestContext) throws IOException {
-    logger.info("拦截开始！" + requestContext.getUriInfo().getPath() + " cok=" + requestContext.getCookies());
+    logger.info("uthorizationFilter " + requestContext.getUriInfo().getPath() + " cok=" + requestContext.getCookies());
     // 从header中得到token
     String auth = requestContext.getHeaderString(Const.TOKEN_HEADER);
     

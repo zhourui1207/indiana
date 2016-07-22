@@ -17,6 +17,12 @@
 	<sql id="Base_Column_List">
 		shipping_address_id, user_id, consignee, phone, area, address, postcode
 	</sql>
+	<select id="selectCountByUserId" resultType="java.lang.Integer"
+    parameterType="java.lang.Long">
+    select count(0)
+    from shipping_address
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
 		select
@@ -24,6 +30,13 @@
 		from shipping_address
 		where shipping_address_id = #{shippingAddressId,jdbcType=BIGINT}
 	</select>
+	<select id="selectByUserId" resultMap="BaseResultMap"
+    parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from shipping_address
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		delete from shipping_address
 		where shipping_address_id = #{shippingAddressId,jdbcType=BIGINT}

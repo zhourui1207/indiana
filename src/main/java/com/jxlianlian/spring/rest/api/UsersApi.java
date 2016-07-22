@@ -64,17 +64,6 @@ public class UsersApi {
   @Context
   private HttpServletRequest request;
 
-  private User queryUserByUserId(Long userId) {
-    User user = null;
-    try {
-      user = userService.queryUserByUserId(userId);
-    } catch (Exception e) {
-      logger.error("queryUserByUserId failed! userId=" + userId, e);
-    }
-    return user;
-  }
-
-
   // 注册用户
   @POST
   @Path("/")
@@ -142,53 +131,51 @@ public class UsersApi {
       return ResponseUtil.ResError(StatusCode.INTERNAL_SERVER_ERROR, ErrorInfo.SERVER_ERROR);
     }
 
-    return ResponseUtil.ResOk(null);
+    return ResponseUtil.ResCreateOk(null);
   }
 
+  // 查询某一个用户简单信息
   @GET
   @Path("/{userId}")
-  public Response getUserByUserId(@PathParam("userId") Long userId) {
-    logger.info("getUserByUserId(userId=" + userId + ", context=" + request.getAttribute(Const.CURRENT_USER_ID) + ")");
+  public Response getUserSimpleInfoByUserId(@PathParam("userId") Long userId) {
+    logger.info("getUserSimpleInfoByUserId(userId=" + userId + ")");
 
-    User user = queryUserByUserId(userId);
-    if (user == null) { // 该用户资源不存在
+    User user = null;
+    try {
+      user = userService.queryUserByUserId(userId);
+    } catch (Exception e) {
+      logger.error("查询用户时，查询数据库异常，用户ID[" + userId + "]", e);
+      return ResponseUtil.ResError(StatusCode.INTERNAL_SERVER_ERROR, ErrorInfo.ACCESS_DB_FAILED);
+    }
+    
+    if (user == null) {  // 该用户资源不存在
       return Response.status(StatusCode.NOT_FOUND)
           .entity(ErrorInfo.messagge(StatusCode.NOT_FOUND, ErrorInfo.USER_NO_EXISTED)).build();
     }
 
-    return Response.status(StatusCode.OK).entity(JsonUtil.toJSon(user)).build();
+    return ResponseUtil.ResGetOk(JsonUtil.toJSon(user));
   }
 
-  @GET
-  @Path("/")
+  // 查询用户列表，次功能暂不开放，管理员可能用到该功能
+  // @GET
+  // @Path("/")
   public Response getUserByParam(@QueryParam("userId") Long userId, @QueryParam("masterUserId") Long masterUserId,
-      @QueryParam("currentUserId") Long currentUserId) {
-
-    logger.info("getUserByParam(userId=" + userId + ", masterUserId=" + masterUserId + ", currentUserId="
-        + currentUserId + ", context=" + request.getAttribute(Const.CURRENT_USER_ID) + ")");
-
-    User user;
-    if (userId != null) {
-      user = queryUserByUserId(userId);
-    } else if (masterUserId != null) {
-
-    }
-
-    return Response.status(200).entity(JsonUtil.toJSon("haha")).build();
+      @QueryParam("pageIndex") Integer pageIndex, @QueryParam("pageSize") Integer pageSize) {
+    return null;
   }
 
-  // 更新用户
-  @PUT
-  @Path("/users/{isbn}")
-  public void addBook(@PathParam("isbn") String id, @QueryParam("name") String name) {
-    logger.info("addBook");
+  // 更新用户 管理员可以用此接口禁用用户
+  // @PUT
+  // @Path("/{userId}")
+  public Response updateUser(@PathParam("userId") String id, @QueryParam("closeDown") boolean closeDown) {
+    return null;
   }
 
-  // 删除用户
+  // 删除用户 管理员才能做这个
   // @DELETE
-  // @Path("/users/{id}")
-  public void removeUser(@PathParam("id") String userId) {
-
+  // @Path("/{userId}")
+  public Response removeUser(@PathParam("userId") String userId) {
+      return null;
   }
 
 }

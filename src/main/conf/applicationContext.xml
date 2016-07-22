@@ -13,7 +13,7 @@
 	
 	<!-- spring的自动查找bean功能 @Repository、@Service、@Controller， 它们分别对应存储层Bean dao，业务层Bean 
     service，和展示层Bean controller-servlet -->
-  <context:component-scan base-package="com.jxlianlian.spring" />
+  <context:component-scan base-package="com.jxlianlian.spring"/>
  
 	<task:annotation-driven/>
 </beans>

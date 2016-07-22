@@ -69,7 +69,7 @@ public class TokenApi {
     long userId = user.getUserId();
     int userType = user.getUserType();
     String tokenStr = TokenManager.createToken(userId, userType, isPhone);
-    return ResponseUtil.ResOk("{" + Const.TOKEN_HEADER + ":" + tokenStr + "}");
+    return ResponseUtil.ResCreateOk("{" + Const.TOKEN_HEADER + ":" + tokenStr + "}");
   }
 
   // 注销

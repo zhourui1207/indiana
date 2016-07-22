@@ -15,6 +15,7 @@ public class ErrorInfo {
   public static String ACCESS_DB_FAILED = "访问数据库失败";
   public static String EXECUTE_SQL_FAILED = "执行SQL失败";
   public static String DATA_INCORRECT = "数据错误";
+  public static String RECORD_NUMBER_TO_UPPER_LIMIT = "记录到达上限";
   public static String TOKEN_TIMEOUT = "用户令牌超时，请重新登录";
   public static String SERVER_ERROR = "服务器内部错误";
   public static String UNKNOWN = "未知错误";

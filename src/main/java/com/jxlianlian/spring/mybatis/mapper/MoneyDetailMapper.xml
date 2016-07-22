@@ -22,6 +22,14 @@
 		from money_detail
 		where money_detail_id = #{moneyDetailId,jdbcType=BIGINT}
 	</select>
+	<select id="selectByUserId" resultMap="BaseResultMap"
+    parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from money_detail
+    where user_id = #{userId,jdbcType=BIGINT}
+    order by insert_time desc
+  </select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		delete from money_detail
 		where money_detail_id = #{moneyDetailId,jdbcType=BIGINT}

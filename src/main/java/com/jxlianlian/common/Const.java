@@ -4,6 +4,9 @@ public final class Const {
   // 是否是测试环境
   public static final boolean IS_TEST = true;
   
+  // 每个人收货地址最大数量
+  public static final int SHIPPING_ADDRESS_COUNT = 5;
+  
   // Spring定时任务执行计划
   public static final String TASK_NEW_DAY_BEGIN = "0 0 0 * * ?";  // 每天00：00执行一次
   public static final String TASK_CLENR_SMS_VERITY_CODE = "0/10 * *  * * ? ";  // 每10秒执行一次
@@ -26,12 +29,23 @@ public final class Const {
   public static final String CURRENT_USER_TYPE = "currentUserType";
   
   // 与客户端统一的参数名
-  public static final String P_USER_TYPE = "userType";
-  public static final String P_IS_PHONE = "isPhone";
   public static final String P_USER_ACCOUNT = "userAccount";
   public static final String P_USER_PASSWORD = "userPassword";
-  public static final String P_SMS_VERITY_CODE = "smsVerityCode";
+  // 注册
   public static final String P_JCAPTCHA = "jcaptcha";
+  public static final String P_SMS_VERITY_CODE = "smsVerityCode";
+  // 登录
+  public static final String P_USER_TYPE = "userType";
+  public static final String P_IS_PHONE = "isPhone"; 
+  // 分页参数
+  public static final String P_PAGE_NO = "pageNo";  // 当前页码
+  public static final String P_PAGE_SIZE = "pageSize";  // 一页显示大小
+  // 收货地址
+  public static final String P_CONSIGNEE = "consignee";  // 收货人
+  public static final String P_PHONE = "phone";  // 手机号
+  public static final String P_AREA = "area";  // 区域 省、市、区
+  public static final String P_ADDRESS = "address";  // 详细地址 街道、小区、门牌号
+  public static final String P_POST_CODE = "postcode";  // 邮编 可不填
   
   // 用户注册方式
   public static final Byte WAY_PHONE = 0;

@@ -22,6 +22,16 @@ public class ShippingAddress implements Serializable {
 
   private String postcode;
 
+  public void initShippingAddress(Long userId, String consignee, String phone, String area,
+      String address, String postcode) {
+      this.userId = userId;
+      this.consignee = consignee;
+      this.phone = phone;
+      this.area = area;
+      this.address = address;
+      this.postcode = postcode;
+  }
+
   public Long getShippingAddressId() {
     return shippingAddressId;
   }
