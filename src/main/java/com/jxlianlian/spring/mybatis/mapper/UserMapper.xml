@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jxlianlian.spring.mybatis.dao.UserMapper">
-  <!-- Cache 配置 -->  
-  <cache eviction="FIFO" flushInterval="3600000" size="1024"/> 
+	<!-- Cache 配置 -->
+	<cache eviction="FIFO" flushInterval="3600000" size="1024" />
 	<resultMap id="BaseResultMap" type="com.jxlianlian.spring.mybatis.model.User">
 		<id column="user_id" property="userId" jdbcType="BIGINT" />
 		<result column="user_account" property="userAccount" jdbcType="VARCHAR" />
@@ -33,25 +33,29 @@
 		<result column="signature" property="signature" jdbcType="VARCHAR" />
 		<result column="close_down" property="closeDown" jdbcType="TINYINT" />
 	</resultMap>
-	
+
 	<sql id="Login_Query_Column_List">
-    user_id, user_password, user_type, user_name, close_down
-  </sql>
+		user_id, user_password, user_type, user_name, close_down
+	</sql>
 	<sql id="Sample_Query_Column_List">
-    user_id, user_name, close_down
-  </sql>
+		user_id, user_name, close_down
+	</sql>
 	<sql id="Base_Column_List">
-		user_id, user_account, wx_id, qq_id, master_user_id, user_type,
+		user_id, user_account, wx_id, qq_id, master_user_id,
+		user_type,
 		email,
 		way, insert_time, update_time, balance, points, qq,
 		default_shipping_address_id,
-		user_name, head, gender, birthday, current_location, home_town, exp, signature, close_down
+		user_name, head, gender, birthday,
+		current_location, home_town, exp, signature, close_down
 	</sql>
 	<sql id="Other_User_Query_Column_List">
-    user_id, user_name, head, gender, birthday, current_location, home_town, exp, signature
-  </sql>
-  
-  <!-- 用主键查询一般是别的用户查的 -->
+		user_id, user_name, head, gender, birthday,
+		current_location, home_town, exp,
+		signature
+	</sql>
+
+	<!-- 用主键查询一般是别的用户查的 -->
 	<select id="selectByUserId" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
 		select
@@ -61,80 +65,88 @@
 	</select>
 	<!-- 这个用户自己查询，才能查询到详细的信息 -->
 	<select id="selectByUserIdSelf" resultMap="BaseResultMap"
-    parameterType="java.lang.Long">
-    select
-    <include refid="Base_Column_List" />
-    from user
-    where user_id = #{userId,jdbcType=BIGINT}
-  </select>
-  <!-- 为了登录而查询用户通过userAccount -->
-  <select id="selectByUserAccountToLogin" resultMap="BaseResultMap"
-    parameterType="java.lang.String">
-    select
-    <include refid="Login_Query_Column_List" />
-    from user
-    where user_account = #{userAccount,jdbcType=VARCHAR}
-  </select>
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where user_id = #{userId,jdbcType=BIGINT}
+	</select>
+	<!-- 为了登录而查询用户通过userAccount -->
+	<select id="selectByUserAccountToLogin" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Login_Query_Column_List" />
+		from user
+		where user_account = #{userAccount,jdbcType=VARCHAR}
+	</select>
 	<select id="selectByUserAccount" resultMap="BaseResultMap"
-    parameterType="java.lang.String">
-    select
-    <include refid="Sample_Query_Column_List" />
-    from user
-    where user_account = #{userAccount,jdbcType=VARCHAR}
-  </select>
-  <select id="selectByWxId" resultMap="BaseResultMap"
-    parameterType="java.lang.String">
-    select
-    <include refid="Sample_Query_Column_List" />
-    from user
-    where wx_id = #{wxId,jdbcType=VARCHAR}
-  </select>
-  <select id="selectByQqId" resultMap="BaseResultMap"
-    parameterType="java.lang.String">
-    select
-    <include refid="Sample_Query_Column_List" />
-    from user
-    where qq_id = #{qqId,jdbcType=VARCHAR}
-  </select>
-  <select id="selectByUserName" resultMap="BaseResultMap"
-    parameterType="java.lang.String">
-    select
-    <include refid="Sample_Query_Column_List" />
-    from user
-    where user_name = #{userName,jdbcType=VARCHAR}
-  </select>
-  <select id="selectByMasterUserId" resultMap="BaseResultMap"
-    parameterType="java.lang.Long">
-    select
-    <include refid="Sample_Query_Column_List" />
-    from user
-    where master_user_id = #{masterUserId,jdbcType=BIGINT}
-  </select>
-  
+		parameterType="java.lang.String">
+		select
+		<include refid="Sample_Query_Column_List" />
+		from user
+		where user_account = #{userAccount,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByWxId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Sample_Query_Column_List" />
+		from user
+		where wx_id = #{wxId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByQqId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Sample_Query_Column_List" />
+		from user
+		where qq_id = #{qqId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByUserName" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Sample_Query_Column_List" />
+		from user
+		where user_name = #{userName,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByMasterUserId" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Sample_Query_Column_List" />
+		from user
+		where master_user_id = #{masterUserId,jdbcType=BIGINT}
+	</select>
+
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		delete from user
 		where user_id = #{userId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.User">
-		insert into user (user_id, user_account, wx_id,
+		insert into user (user_id,
+		user_account, wx_id,
 		qq_id, master_user_id, user_type,
-		user_password, email, way,
+		user_password,
+		email, way,
 		insert_time, update_time, balance,
-		points, qq, default_shipping_address_id,
+		points, qq,
+		default_shipping_address_id,
 		user_name, head, gender,
-		birthday, current_location, home_town,
+		birthday,
+		current_location, home_town,
 		exp, signature)
-		values (#{userId,jdbcType=BIGINT}, #{userAccount,jdbcType=VARCHAR},
+		values
+		(#{userId,jdbcType=BIGINT}, #{userAccount,jdbcType=VARCHAR},
 		#{wxId,jdbcType=VARCHAR},
-		#{qqId,jdbcType=VARCHAR}, #{masterUserId,jdbcType=BIGINT}, #{userType,jdbcType=TINYINT},
+		#{qqId,jdbcType=VARCHAR},
+		#{masterUserId,jdbcType=BIGINT}, #{userType,jdbcType=TINYINT},
 		#{userPassword,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
 		#{way,jdbcType=TINYINT},
-		#{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{balance,jdbcType=DECIMAL},
+		#{insertTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP}, #{balance,jdbcType=DECIMAL},
 		#{points,jdbcType=BIGINT}, #{qq,jdbcType=VARCHAR},
 		#{defaultShippingAddressId,jdbcType=BIGINT},
 		#{userName,jdbcType=VARCHAR}, #{head,jdbcType=VARCHAR},
 		#{gender,jdbcType=TINYINT},
-		#{birthday,jdbcType=DATE}, #{currentLocation,jdbcType=VARCHAR}, #{homeTown,jdbcType=VARCHAR},
+		#{birthday,jdbcType=DATE},
+		#{currentLocation,jdbcType=VARCHAR}, #{homeTown,jdbcType=VARCHAR},
 		#{exp,jdbcType=BIGINT}, #{signature,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective" parameterType="com.jxlianlian.spring.mybatis.model.User">
@@ -357,28 +369,41 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.User">
 		update user
-		set user_account = #{userAccount,jdbcType=VARCHAR},
-		wx_id = #{wxId,jdbcType=VARCHAR},
+		set
+		user_account = #{userAccount,jdbcType=VARCHAR},
+		wx_id =
+		#{wxId,jdbcType=VARCHAR},
 		qq_id = #{qqId,jdbcType=VARCHAR},
 		master_user_id = #{masterUserId,jdbcType=BIGINT},
-		user_type = #{userType,jdbcType=TINYINT},
-		user_password = #{userPassword,jdbcType=VARCHAR},
+		user_type =
+		#{userType,jdbcType=TINYINT},
+		user_password =
+		#{userPassword,jdbcType=VARCHAR},
 		email = #{email,jdbcType=VARCHAR},
 		way = #{way,jdbcType=TINYINT},
-		insert_time = #{insertTime,jdbcType=TIMESTAMP},
-		update_time = #{updateTime,jdbcType=TIMESTAMP},
-		balance = #{balance,jdbcType=DECIMAL},
+		insert_time =
+		#{insertTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP},
+		balance =
+		#{balance,jdbcType=DECIMAL},
 		points = #{points,jdbcType=BIGINT},
-		qq = #{qq,jdbcType=VARCHAR},
-		default_shipping_address_id = #{defaultShippingAddressId,jdbcType=BIGINT},
-		user_name = #{userName,jdbcType=VARCHAR},
+		qq =
+		#{qq,jdbcType=VARCHAR},
+		default_shipping_address_id =
+		#{defaultShippingAddressId,jdbcType=BIGINT},
+		user_name =
+		#{userName,jdbcType=VARCHAR},
 		head = #{head,jdbcType=VARCHAR},
-		gender = #{gender,jdbcType=TINYINT},
+		gender =
+		#{gender,jdbcType=TINYINT},
 		birthday = #{birthday,jdbcType=DATE},
 		current_location = #{currentLocation,jdbcType=VARCHAR},
-		home_town = #{homeTown,jdbcType=VARCHAR},
+		home_town =
+		#{homeTown,jdbcType=VARCHAR},
 		exp = #{exp,jdbcType=BIGINT},
-		signature = #{signature,jdbcType=VARCHAR}
+		signature =
+		#{signature,jdbcType=VARCHAR}
 		where user_id = #{userId,jdbcType=BIGINT}
 	</update>
 </mapper>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jxlianlian.spring.mybatis.dao.SellingGoodsMapper">
-  <!-- Cache 配置 -->  
-  <cache eviction="FIFO" flushInterval="5000" size="512"/>
+	<!-- Cache 配置 -->
+	<cache eviction="FIFO" flushInterval="5000" size="512" />
 	<resultMap id="BaseResultMap"
 		type="com.jxlianlian.spring.mybatis.model.SellingGoods">
 		<id column="selling_goods_id" property="sellingGoodsId" jdbcType="BIGINT" />
@@ -13,21 +13,26 @@
 		<result column="is_selling" property="isSelling" jdbcType="INTEGER" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		selling_goods_id, goods_template_id, period, goods_id, is_selling
+		selling_goods_id, goods_template_id, period, goods_id,
+		is_selling
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
 		from selling_goods
-		where selling_goods_id = #{sellingGoodsId,jdbcType=BIGINT}
+		where selling_goods_id =
+		#{sellingGoodsId,jdbcType=BIGINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from selling_goods
-		where selling_goods_id = #{sellingGoodsId,jdbcType=BIGINT}
+		delete from
+		selling_goods
+		where selling_goods_id =
+		#{sellingGoodsId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.SellingGoods">
-		insert into selling_goods (selling_goods_id, goods_template_id,
+		insert into selling_goods
+		(selling_goods_id, goods_template_id,
 		period,
 		goods_id, is_selling)
 		values (#{sellingGoodsId,jdbcType=BIGINT},
@@ -90,11 +95,15 @@
 		where selling_goods_id = #{sellingGoodsId,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.SellingGoods">
-		update selling_goods
-		set goods_template_id = #{goodsTemplateId,jdbcType=BIGINT},
+		update
+		selling_goods
+		set goods_template_id =
+		#{goodsTemplateId,jdbcType=BIGINT},
 		period = #{period,jdbcType=BIGINT},
 		goods_id = #{goodsId,jdbcType=BIGINT},
-		is_selling = #{isSelling,jdbcType=INTEGER}
-		where selling_goods_id = #{sellingGoodsId,jdbcType=BIGINT}
+		is_selling =
+		#{isSelling,jdbcType=INTEGER}
+		where selling_goods_id =
+		#{sellingGoodsId,jdbcType=BIGINT}
 	</update>
 </mapper>

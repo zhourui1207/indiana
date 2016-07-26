@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jxlianlian.spring.mybatis.dao.ShoppingRecordMapper">
-  <!-- Cache 配置 -->  
-  <cache eviction="LRU" flushInterval="3600000" size="102400"/> 
+	<!-- Cache 配置 -->
+	<cache eviction="LRU" flushInterval="3600000" size="102400" />
 	<resultMap id="BaseResultMap"
 		type="com.jxlianlian.spring.mybatis.model.ShoppingRecord">
 		<id column="shopping_record_id" property="shoppingRecordId"
@@ -22,33 +22,44 @@
 		<result column="little_pic" property="littlePic" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		shopping_record_id, user_id, user_name, head, location, ip_address, buy_count,
+		shopping_record_id, user_id, user_name, head, location,
+		ip_address, buy_count,
 		insert_time,
-		goods_id, goods_template_id, period, goods_name, little_pic
+		goods_id, goods_template_id, period,
+		goods_name, little_pic
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
 		from shopping_record
-		where shopping_record_id = #{shoppingRecordId,jdbcType=BIGINT}
+		where shopping_record_id =
+		#{shoppingRecordId,jdbcType=BIGINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from shopping_record
-		where shopping_record_id = #{shoppingRecordId,jdbcType=BIGINT}
+		delete from
+		shopping_record
+		where shopping_record_id =
+		#{shoppingRecordId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.ShoppingRecord">
-		insert into shopping_record (shopping_record_id, user_id, user_name,
+		insert into shopping_record
+		(shopping_record_id, user_id, user_name,
 		head, location, ip_address,
 		buy_count, insert_time, goods_id,
-		goods_template_id, period, goods_name,
+		goods_template_id, period,
+		goods_name,
 		little_pic)
-		values (#{shoppingRecordId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+		values (#{shoppingRecordId,jdbcType=BIGINT},
+		#{userId,jdbcType=BIGINT},
 		#{userName,jdbcType=VARCHAR},
-		#{head,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR},
-		#{buyCount,jdbcType=BIGINT}, #{insertTime,jdbcType=TIMESTAMP},
+		#{head,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR},
+		#{ipAddress,jdbcType=VARCHAR},
+		#{buyCount,jdbcType=BIGINT},
+		#{insertTime,jdbcType=TIMESTAMP},
 		#{goodsId,jdbcType=BIGINT},
-		#{goodsTemplateId,jdbcType=BIGINT}, #{period,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR},
+		#{goodsTemplateId,jdbcType=BIGINT}, #{period,jdbcType=BIGINT},
+		#{goodsName,jdbcType=VARCHAR},
 		#{littlePic,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective" parameterType="com.jxlianlian.spring.mybatis.model.ShoppingRecord">
@@ -179,19 +190,27 @@
 		where shopping_record_id = #{shoppingRecordId,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.ShoppingRecord">
-		update shopping_record
+		update
+		shopping_record
 		set user_id = #{userId,jdbcType=BIGINT},
-		user_name = #{userName,jdbcType=VARCHAR},
+		user_name =
+		#{userName,jdbcType=VARCHAR},
 		head = #{head,jdbcType=VARCHAR},
-		location = #{location,jdbcType=VARCHAR},
-		ip_address = #{ipAddress,jdbcType=VARCHAR},
+		location
+		= #{location,jdbcType=VARCHAR},
+		ip_address =
+		#{ipAddress,jdbcType=VARCHAR},
 		buy_count = #{buyCount,jdbcType=BIGINT},
 		insert_time = #{insertTime,jdbcType=TIMESTAMP},
-		goods_id = #{goodsId,jdbcType=BIGINT},
-		goods_template_id = #{goodsTemplateId,jdbcType=BIGINT},
+		goods_id =
+		#{goodsId,jdbcType=BIGINT},
+		goods_template_id =
+		#{goodsTemplateId,jdbcType=BIGINT},
 		period = #{period,jdbcType=BIGINT},
 		goods_name = #{goodsName,jdbcType=VARCHAR},
-		little_pic = #{littlePic,jdbcType=VARCHAR}
-		where shopping_record_id = #{shoppingRecordId,jdbcType=BIGINT}
+		little_pic =
+		#{littlePic,jdbcType=VARCHAR}
+		where shopping_record_id =
+		#{shoppingRecordId,jdbcType=BIGINT}
 	</update>
 </mapper>

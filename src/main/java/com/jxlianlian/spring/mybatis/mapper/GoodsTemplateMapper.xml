@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jxlianlian.spring.mybatis.dao.GoodsTemplateMapper">
-  <!-- Cache 配置 -->  
-  <cache eviction="LRU" flushInterval="86400000" size="512"/>
+	<!-- Cache 配置 -->
+	<cache eviction="LRU" flushInterval="86400000" size="512" />
 	<resultMap id="BaseResultMap"
 		type="com.jxlianlian.spring.mybatis.model.GoodsTemplate">
 		<id column="goods_template_id" property="goodsTemplateId" jdbcType="BIGINT" />
@@ -50,12 +50,16 @@
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		goods_template_id, goods_name, little_pic, goods_type, price, total, unit_price,
-		goods_content, memo, preview_pic_first, preview_pic_second,
+		goods_template_id, goods_name, little_pic, goods_type,
+		price, total, unit_price,
+		goods_content, memo, preview_pic_first,
+		preview_pic_second,
 		preview_pic_third, preview_pic_fourth,
-		preview_pic_fifth, detail_pic_first, detail_pic_second, detail_pic_third,
+		preview_pic_fifth, detail_pic_first, detail_pic_second,
+		detail_pic_third,
 		detail_pic_fourth,
-		detail_pic_fifth, detail_pic_sixth, detail_pic_seventh, detail_pic_eighth,
+		detail_pic_fifth, detail_pic_sixth,
+		detail_pic_seventh, detail_pic_eighth,
 		detail_pic_ninth,
 		detail_pic_tenth, stock, insert_time, update_time
 	</sql>
@@ -64,29 +68,41 @@
 		select
 		<include refid="Base_Column_List" />
 		from goods_template
-		where goods_template_id = #{goodsTemplateId,jdbcType=BIGINT}
+		where goods_template_id =
+		#{goodsTemplateId,jdbcType=BIGINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from goods_template
-		where goods_template_id = #{goodsTemplateId,jdbcType=BIGINT}
+		delete from
+		goods_template
+		where goods_template_id =
+		#{goodsTemplateId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.GoodsTemplate">
-		insert into goods_template (goods_template_id, goods_name, little_pic,
+		insert into goods_template
+		(goods_template_id, goods_name, little_pic,
 		goods_type, price, total,
 		unit_price, goods_content, memo,
-		preview_pic_first, preview_pic_second, preview_pic_third,
-		preview_pic_fourth, preview_pic_fifth, detail_pic_first,
-		detail_pic_second, detail_pic_third, detail_pic_fourth,
-		detail_pic_fifth, detail_pic_sixth, detail_pic_seventh,
-		detail_pic_eighth, detail_pic_ninth, detail_pic_tenth,
+		preview_pic_first, preview_pic_second,
+		preview_pic_third,
+		preview_pic_fourth, preview_pic_fifth,
+		detail_pic_first,
+		detail_pic_second, detail_pic_third,
+		detail_pic_fourth,
+		detail_pic_fifth, detail_pic_sixth,
+		detail_pic_seventh,
+		detail_pic_eighth, detail_pic_ninth,
+		detail_pic_tenth,
 		stock, insert_time, update_time
 		)
-		values (#{goodsTemplateId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR},
+		values
+		(#{goodsTemplateId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR},
 		#{littlePic,jdbcType=VARCHAR},
-		#{goodsType,jdbcType=TINYINT}, #{price,jdbcType=VARCHAR}, #{total,jdbcType=BIGINT},
+		#{goodsType,jdbcType=TINYINT},
+		#{price,jdbcType=VARCHAR}, #{total,jdbcType=BIGINT},
 		#{unitPrice,jdbcType=INTEGER}, #{goodsContent,jdbcType=VARCHAR},
 		#{memo,jdbcType=VARCHAR},
-		#{previewPicFirst,jdbcType=VARCHAR}, #{previewPicSecond,jdbcType=VARCHAR},
+		#{previewPicFirst,jdbcType=VARCHAR},
+		#{previewPicSecond,jdbcType=VARCHAR},
 		#{previewPicThird,jdbcType=VARCHAR},
 		#{previewPicFourth,jdbcType=VARCHAR},
 		#{previewPicFifth,jdbcType=VARCHAR},
@@ -100,7 +116,8 @@
 		#{detailPicEighth,jdbcType=VARCHAR},
 		#{detailPicNinth,jdbcType=VARCHAR},
 		#{detailPicTenth,jdbcType=VARCHAR},
-		#{stock,jdbcType=BIGINT}, #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+		#{stock,jdbcType=BIGINT},
+		#{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.jxlianlian.spring.mybatis.model.GoodsTemplate">
@@ -303,13 +320,15 @@
 				preview_pic_first = #{previewPicFirst,jdbcType=VARCHAR},
 			</if>
 			<if test="previewPicSecond != null">
-				preview_pic_second = #{previewPicSecond,jdbcType=VARCHAR},
+				preview_pic_second =
+				#{previewPicSecond,jdbcType=VARCHAR},
 			</if>
 			<if test="previewPicThird != null">
 				preview_pic_third = #{previewPicThird,jdbcType=VARCHAR},
 			</if>
 			<if test="previewPicFourth != null">
-				preview_pic_fourth = #{previewPicFourth,jdbcType=VARCHAR},
+				preview_pic_fourth =
+				#{previewPicFourth,jdbcType=VARCHAR},
 			</if>
 			<if test="previewPicFifth != null">
 				preview_pic_fifth = #{previewPicFifth,jdbcType=VARCHAR},
@@ -333,7 +352,8 @@
 				detail_pic_sixth = #{detailPicSixth,jdbcType=VARCHAR},
 			</if>
 			<if test="detailPicSeventh != null">
-				detail_pic_seventh = #{detailPicSeventh,jdbcType=VARCHAR},
+				detail_pic_seventh =
+				#{detailPicSeventh,jdbcType=VARCHAR},
 			</if>
 			<if test="detailPicEighth != null">
 				detail_pic_eighth = #{detailPicEighth,jdbcType=VARCHAR},
@@ -357,33 +377,54 @@
 		where goods_template_id = #{goodsTemplateId,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.GoodsTemplate">
-		update goods_template
+		update
+		goods_template
 		set goods_name = #{goodsName,jdbcType=VARCHAR},
 		little_pic = #{littlePic,jdbcType=VARCHAR},
-		goods_type = #{goodsType,jdbcType=TINYINT},
+		goods_type =
+		#{goodsType,jdbcType=TINYINT},
 		price = #{price,jdbcType=VARCHAR},
-		total = #{total,jdbcType=BIGINT},
+		total
+		= #{total,jdbcType=BIGINT},
 		unit_price = #{unitPrice,jdbcType=INTEGER},
 		goods_content = #{goodsContent,jdbcType=VARCHAR},
-		memo = #{memo,jdbcType=VARCHAR},
-		preview_pic_first = #{previewPicFirst,jdbcType=VARCHAR},
-		preview_pic_second = #{previewPicSecond,jdbcType=VARCHAR},
-		preview_pic_third = #{previewPicThird,jdbcType=VARCHAR},
-		preview_pic_fourth = #{previewPicFourth,jdbcType=VARCHAR},
-		preview_pic_fifth = #{previewPicFifth,jdbcType=VARCHAR},
-		detail_pic_first = #{detailPicFirst,jdbcType=VARCHAR},
-		detail_pic_second = #{detailPicSecond,jdbcType=VARCHAR},
-		detail_pic_third = #{detailPicThird,jdbcType=VARCHAR},
-		detail_pic_fourth = #{detailPicFourth,jdbcType=VARCHAR},
-		detail_pic_fifth = #{detailPicFifth,jdbcType=VARCHAR},
-		detail_pic_sixth = #{detailPicSixth,jdbcType=VARCHAR},
-		detail_pic_seventh = #{detailPicSeventh,jdbcType=VARCHAR},
-		detail_pic_eighth = #{detailPicEighth,jdbcType=VARCHAR},
-		detail_pic_ninth = #{detailPicNinth,jdbcType=VARCHAR},
-		detail_pic_tenth = #{detailPicTenth,jdbcType=VARCHAR},
+		memo =
+		#{memo,jdbcType=VARCHAR},
+		preview_pic_first =
+		#{previewPicFirst,jdbcType=VARCHAR},
+		preview_pic_second =
+		#{previewPicSecond,jdbcType=VARCHAR},
+		preview_pic_third =
+		#{previewPicThird,jdbcType=VARCHAR},
+		preview_pic_fourth =
+		#{previewPicFourth,jdbcType=VARCHAR},
+		preview_pic_fifth =
+		#{previewPicFifth,jdbcType=VARCHAR},
+		detail_pic_first =
+		#{detailPicFirst,jdbcType=VARCHAR},
+		detail_pic_second =
+		#{detailPicSecond,jdbcType=VARCHAR},
+		detail_pic_third =
+		#{detailPicThird,jdbcType=VARCHAR},
+		detail_pic_fourth =
+		#{detailPicFourth,jdbcType=VARCHAR},
+		detail_pic_fifth =
+		#{detailPicFifth,jdbcType=VARCHAR},
+		detail_pic_sixth =
+		#{detailPicSixth,jdbcType=VARCHAR},
+		detail_pic_seventh =
+		#{detailPicSeventh,jdbcType=VARCHAR},
+		detail_pic_eighth =
+		#{detailPicEighth,jdbcType=VARCHAR},
+		detail_pic_ninth =
+		#{detailPicNinth,jdbcType=VARCHAR},
+		detail_pic_tenth =
+		#{detailPicTenth,jdbcType=VARCHAR},
 		stock = #{stock,jdbcType=BIGINT},
 		insert_time = #{insertTime,jdbcType=TIMESTAMP},
-		update_time = #{updateTime,jdbcType=TIMESTAMP}
-		where goods_template_id = #{goodsTemplateId,jdbcType=BIGINT}
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where goods_template_id =
+		#{goodsTemplateId,jdbcType=BIGINT}
 	</update>
 </mapper>

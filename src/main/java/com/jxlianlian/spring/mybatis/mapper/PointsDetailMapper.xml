@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jxlianlian.spring.mybatis.dao.PointsDetailMapper">
-  <!-- Cache 配置 -->  
-  <cache eviction="LRU" flushInterval="300000" size="10240"/>
+	<!-- Cache 配置 -->
+	<cache eviction="LRU" flushInterval="300000" size="10240" />
 	<resultMap id="BaseResultMap"
 		type="com.jxlianlian.spring.mybatis.model.PointsDetail">
 		<id column="points_detail_id" property="pointsDetailId" jdbcType="BIGINT" />
@@ -13,34 +13,41 @@
 		<result column="points" property="points" jdbcType="BIGINT" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		points_detail_id, user_id, points_type, way, insert_time, points
+		points_detail_id, user_id, points_type, way, insert_time,
+		points
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
 		from points_detail
-		where points_detail_id = #{pointsDetailId,jdbcType=BIGINT}
+		where points_detail_id =
+		#{pointsDetailId,jdbcType=BIGINT}
 	</select>
 	<select id="selectByUserId" resultMap="BaseResultMap"
-    parameterType="java.lang.Long">
-    select
-    <include refid="Base_Column_List" />
-    from points_detail
-    where user_id = #{userId,jdbcType=BIGINT}
-    order by insert_time desc
-  </select>
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from points_detail
+		where user_id = #{userId,jdbcType=BIGINT}
+		order by
+		insert_time desc
+	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from points_detail
-		where points_detail_id = #{pointsDetailId,jdbcType=BIGINT}
+		delete from
+		points_detail
+		where points_detail_id =
+		#{pointsDetailId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.PointsDetail">
-		insert into points_detail (points_detail_id, user_id, points_type,
+		insert into points_detail
+		(points_detail_id, user_id, points_type,
 		way, insert_time, points
 		)
 		values (#{pointsDetailId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
 		#{pointsType,jdbcType=TINYINT},
-		#{way,jdbcType=TINYINT}, #{insertTime,jdbcType=TIMESTAMP}, #{points,jdbcType=BIGINT}
+		#{way,jdbcType=TINYINT},
+		#{insertTime,jdbcType=TIMESTAMP}, #{points,jdbcType=BIGINT}
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.jxlianlian.spring.mybatis.model.PointsDetail">
@@ -108,12 +115,16 @@
 		where points_detail_id = #{pointsDetailId,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.PointsDetail">
-		update points_detail
+		update
+		points_detail
 		set user_id = #{userId,jdbcType=BIGINT},
-		points_type = #{pointsType,jdbcType=TINYINT},
+		points_type =
+		#{pointsType,jdbcType=TINYINT},
 		way = #{way,jdbcType=TINYINT},
 		insert_time = #{insertTime,jdbcType=TIMESTAMP},
-		points = #{points,jdbcType=BIGINT}
-		where points_detail_id = #{pointsDetailId,jdbcType=BIGINT}
+		points =
+		#{points,jdbcType=BIGINT}
+		where points_detail_id =
+		#{pointsDetailId,jdbcType=BIGINT}
 	</update>
 </mapper>

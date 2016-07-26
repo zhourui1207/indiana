@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jxlianlian.spring.mybatis.dao.CalculationDetailMapper">
-  <!-- Cache 配置 -->  
-  <cache eviction="FIFO" flushInterval="3600000" size="512"/>
+	<!-- Cache 配置 -->
+	<cache eviction="FIFO" flushInterval="3600000" size="512" />
 	<resultMap id="BaseResultMap"
 		type="com.jxlianlian.spring.mybatis.model.CalculationDetail">
 		<id column="calculation_detail_id" property="calculationDetailId"
@@ -16,28 +16,36 @@
 		<result column="variable" property="variable" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		calculation_detail_id, time_sum, total, ticket_period, ticket_number, variable
+		calculation_detail_id, time_sum, total, ticket_period,
+		ticket_number, variable
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
 		from calculation_detail
-		where calculation_detail_id = #{calculationDetailId,jdbcType=INTEGER}
+		where calculation_detail_id =
+		#{calculationDetailId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from calculation_detail
-		where calculation_detail_id = #{calculationDetailId,jdbcType=INTEGER}
+		delete from
+		calculation_detail
+		where calculation_detail_id =
+		#{calculationDetailId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert"
 		parameterType="com.jxlianlian.spring.mybatis.model.CalculationDetail">
-		insert into calculation_detail (calculation_detail_id, time_sum,
+		insert into calculation_detail (calculation_detail_id,
+		time_sum,
 		total,
 		ticket_period, ticket_number, variable
 		)
-		values (#{calculationDetailId,jdbcType=INTEGER},
-		#{timeSum,jdbcType=VARCHAR}, #{total,jdbcType=VARCHAR},
-		#{ticketPeriod,jdbcType=VARCHAR}, #{ticketNumber,jdbcType=VARCHAR},
+		values
+		(#{calculationDetailId,jdbcType=INTEGER},
+		#{timeSum,jdbcType=VARCHAR},
+		#{total,jdbcType=VARCHAR},
+		#{ticketPeriod,jdbcType=VARCHAR},
+		#{ticketNumber,jdbcType=VARCHAR},
 		#{variable,jdbcType=VARCHAR}
 		)
 	</insert>
@@ -110,11 +118,15 @@
 	<update id="updateByPrimaryKey"
 		parameterType="com.jxlianlian.spring.mybatis.model.CalculationDetail">
 		update calculation_detail
-		set time_sum = #{timeSum,jdbcType=VARCHAR},
+		set time_sum =
+		#{timeSum,jdbcType=VARCHAR},
 		total = #{total,jdbcType=VARCHAR},
 		ticket_period = #{ticketPeriod,jdbcType=VARCHAR},
-		ticket_number = #{ticketNumber,jdbcType=VARCHAR},
-		variable = #{variable,jdbcType=VARCHAR}
-		where calculation_detail_id = #{calculationDetailId,jdbcType=INTEGER}
+		ticket_number =
+		#{ticketNumber,jdbcType=VARCHAR},
+		variable =
+		#{variable,jdbcType=VARCHAR}
+		where calculation_detail_id =
+		#{calculationDetailId,jdbcType=INTEGER}
 	</update>
 </mapper>

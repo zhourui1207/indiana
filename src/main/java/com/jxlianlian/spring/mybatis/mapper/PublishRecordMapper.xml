@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jxlianlian.spring.mybatis.dao.PublishRecordMapper">
-  <!-- Cache 配置 -->  
-  <cache eviction="FIFO" flushInterval="3600000" size="1024"/>
+	<!-- Cache 配置 -->
+	<cache eviction="FIFO" flushInterval="3600000" size="1024" />
 	<resultMap id="BaseResultMap"
 		type="com.jxlianlian.spring.mybatis.model.PublishRecord">
 		<id column="publish_record_id" property="publishRecordId" jdbcType="BIGINT" />
@@ -30,9 +30,11 @@
 			jdbcType="BIGINT" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		publish_record_id, goods_id, goods_template_id, period, goods_name, little_pic,
+		publish_record_id, goods_id, goods_template_id, period,
+		goods_name, little_pic,
 		insert_time,
-		expect_publish_time, user_id, user_name, location, head, total, buy_count, lucky_number,
+		expect_publish_time, user_id,
+		user_name, location, head, total, buy_count, lucky_number,
 		publish_time, lucky_time, calculation_detail_id,
 		publish_record_detail_id
 	</sql>
@@ -41,29 +43,39 @@
 		select
 		<include refid="Base_Column_List" />
 		from publish_record
-		where publish_record_id = #{publishRecordId,jdbcType=BIGINT}
+		where publish_record_id =
+		#{publishRecordId,jdbcType=BIGINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from publish_record
-		where publish_record_id = #{publishRecordId,jdbcType=BIGINT}
+		delete from
+		publish_record
+		where publish_record_id =
+		#{publishRecordId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.PublishRecord">
-		insert into publish_record (publish_record_id, goods_id,
+		insert into publish_record
+		(publish_record_id, goods_id,
 		goods_template_id,
-		period, goods_name, little_pic,
+		period, goods_name,
+		little_pic,
 		insert_time, expect_publish_time, user_id,
-		user_name, location, head,
+		user_name,
+		location, head,
 		total, buy_count, lucky_number,
-		publish_time, lucky_time, calculation_detail_id,
+		publish_time,
+		lucky_time, calculation_detail_id,
 		publish_record_detail_id)
-		values (#{publishRecordId,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT},
+		values
+		(#{publishRecordId,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT},
 		#{goodsTemplateId,jdbcType=BIGINT},
-		#{period,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, #{littlePic,jdbcType=VARCHAR},
+		#{period,jdbcType=BIGINT},
+		#{goodsName,jdbcType=VARCHAR}, #{littlePic,jdbcType=VARCHAR},
 		#{insertTime,jdbcType=TIMESTAMP},
 		#{expectPublishTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=BIGINT},
 		#{userName,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR},
 		#{head,jdbcType=VARCHAR},
-		#{total,jdbcType=BIGINT}, #{buyCount,jdbcType=VARCHAR}, #{luckyNumber,jdbcType=VARCHAR},
+		#{total,jdbcType=BIGINT},
+		#{buyCount,jdbcType=VARCHAR}, #{luckyNumber,jdbcType=VARCHAR},
 		#{publishTime,jdbcType=TIMESTAMP}, #{luckyTime,jdbcType=TIMESTAMP},
 		#{calculationDetailId,jdbcType=INTEGER},
 		#{publishRecordDetailId,jdbcType=BIGINT})
@@ -211,7 +223,8 @@
 				insert_time = #{insertTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="expectPublishTime != null">
-				expect_publish_time = #{expectPublishTime,jdbcType=TIMESTAMP},
+				expect_publish_time =
+				#{expectPublishTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="userId != null">
 				user_id = #{userId,jdbcType=BIGINT},
@@ -241,34 +254,49 @@
 				lucky_time = #{luckyTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="calculationDetailId != null">
-				calculation_detail_id = #{calculationDetailId,jdbcType=INTEGER},
+				calculation_detail_id =
+				#{calculationDetailId,jdbcType=INTEGER},
 			</if>
 			<if test="publishRecordDetailId != null">
-				publish_record_detail_id = #{publishRecordDetailId,jdbcType=BIGINT},
+				publish_record_detail_id =
+				#{publishRecordDetailId,jdbcType=BIGINT},
 			</if>
 		</set>
 		where publish_record_id = #{publishRecordId,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.PublishRecord">
-		update publish_record
+		update
+		publish_record
 		set goods_id = #{goodsId,jdbcType=BIGINT},
 		goods_template_id = #{goodsTemplateId,jdbcType=BIGINT},
-		period = #{period,jdbcType=BIGINT},
+		period =
+		#{period,jdbcType=BIGINT},
 		goods_name = #{goodsName,jdbcType=VARCHAR},
 		little_pic = #{littlePic,jdbcType=VARCHAR},
-		insert_time = #{insertTime,jdbcType=TIMESTAMP},
-		expect_publish_time = #{expectPublishTime,jdbcType=TIMESTAMP},
-		user_id = #{userId,jdbcType=BIGINT},
+		insert_time =
+		#{insertTime,jdbcType=TIMESTAMP},
+		expect_publish_time =
+		#{expectPublishTime,jdbcType=TIMESTAMP},
+		user_id =
+		#{userId,jdbcType=BIGINT},
 		user_name = #{userName,jdbcType=VARCHAR},
 		location = #{location,jdbcType=VARCHAR},
-		head = #{head,jdbcType=VARCHAR},
+		head =
+		#{head,jdbcType=VARCHAR},
 		total = #{total,jdbcType=BIGINT},
-		buy_count = #{buyCount,jdbcType=VARCHAR},
-		lucky_number = #{luckyNumber,jdbcType=VARCHAR},
-		publish_time = #{publishTime,jdbcType=TIMESTAMP},
-		lucky_time = #{luckyTime,jdbcType=TIMESTAMP},
-		calculation_detail_id = #{calculationDetailId,jdbcType=INTEGER},
-		publish_record_detail_id = #{publishRecordDetailId,jdbcType=BIGINT}
-		where publish_record_id = #{publishRecordId,jdbcType=BIGINT}
+		buy_count =
+		#{buyCount,jdbcType=VARCHAR},
+		lucky_number =
+		#{luckyNumber,jdbcType=VARCHAR},
+		publish_time =
+		#{publishTime,jdbcType=TIMESTAMP},
+		lucky_time =
+		#{luckyTime,jdbcType=TIMESTAMP},
+		calculation_detail_id =
+		#{calculationDetailId,jdbcType=INTEGER},
+		publish_record_detail_id =
+		#{publishRecordDetailId,jdbcType=BIGINT}
+		where publish_record_id =
+		#{publishRecordId,jdbcType=BIGINT}
 	</update>
 </mapper>

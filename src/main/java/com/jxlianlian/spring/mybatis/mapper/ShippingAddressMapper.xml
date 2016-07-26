@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jxlianlian.spring.mybatis.dao.ShippingAddressMapper">
-  <!-- Cache 配置 -->  
-  <cache eviction="FIFO" flushInterval="3600000" size="1024"/>
+	<!-- Cache 配置 -->
+	<cache eviction="FIFO" flushInterval="3600000" size="1024" />
 	<resultMap id="BaseResultMap"
 		type="com.jxlianlian.spring.mybatis.model.ShippingAddress">
 		<id column="shipping_address_id" property="shippingAddressId"
@@ -15,39 +15,47 @@
 		<result column="postcode" property="postcode" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		shipping_address_id, user_id, consignee, phone, area, address, postcode
+		shipping_address_id, user_id, consignee, phone, area,
+		address, postcode
 	</sql>
 	<select id="selectCountByUserId" resultType="java.lang.Integer"
-    parameterType="java.lang.Long">
-    select count(0)
-    from shipping_address
-    where user_id = #{userId,jdbcType=BIGINT}
-  </select>
+		parameterType="java.lang.Long">
+		select count(0)
+		from shipping_address
+		where user_id =
+		#{userId,jdbcType=BIGINT}
+	</select>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
 		from shipping_address
-		where shipping_address_id = #{shippingAddressId,jdbcType=BIGINT}
+		where shipping_address_id =
+		#{shippingAddressId,jdbcType=BIGINT}
 	</select>
 	<select id="selectByUserId" resultMap="BaseResultMap"
-    parameterType="java.lang.Long">
-    select
-    <include refid="Base_Column_List" />
-    from shipping_address
-    where user_id = #{userId,jdbcType=BIGINT}
-  </select>
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from shipping_address
+		where user_id = #{userId,jdbcType=BIGINT}
+	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from shipping_address
-		where shipping_address_id = #{shippingAddressId,jdbcType=BIGINT}
+		delete from
+		shipping_address
+		where shipping_address_id =
+		#{shippingAddressId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.ShippingAddress">
-		insert into shipping_address (shipping_address_id, user_id, consignee,
+		insert into shipping_address
+		(shipping_address_id, user_id, consignee,
 		phone, area, address,
 		postcode)
-		values (#{shippingAddressId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+		values (#{shippingAddressId,jdbcType=BIGINT},
+		#{userId,jdbcType=BIGINT},
 		#{consignee,jdbcType=VARCHAR},
-		#{phone,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},
 		#{postcode,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective" parameterType="com.jxlianlian.spring.mybatis.model.ShippingAddress">
@@ -124,13 +132,17 @@
 		where shipping_address_id = #{shippingAddressId,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.ShippingAddress">
-		update shipping_address
+		update
+		shipping_address
 		set user_id = #{userId,jdbcType=BIGINT},
-		consignee = #{consignee,jdbcType=VARCHAR},
+		consignee =
+		#{consignee,jdbcType=VARCHAR},
 		phone = #{phone,jdbcType=VARCHAR},
-		area = #{area,jdbcType=VARCHAR},
+		area =
+		#{area,jdbcType=VARCHAR},
 		address = #{address,jdbcType=VARCHAR},
 		postcode = #{postcode,jdbcType=VARCHAR}
-		where shipping_address_id = #{shippingAddressId,jdbcType=BIGINT}
+		where shipping_address_id =
+		#{shippingAddressId,jdbcType=BIGINT}
 	</update>
 </mapper>

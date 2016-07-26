@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jxlianlian.spring.mybatis.dao.PromotionMapper">
-  <!-- Cache 配置 -->  
-  <cache eviction="FIFO" flushInterval="7200000" size="30"/>
+	<!-- Cache 配置 -->
+	<cache eviction="FIFO" flushInterval="7200000" size="30" />
 	<resultMap id="BaseResultMap" type="com.jxlianlian.spring.mybatis.model.Promotion">
 		<id column="promotion_id" property="promotionId" jdbcType="BIGINT" />
 		<result column="promotion_name" property="promotionName"
@@ -19,7 +19,8 @@
 			jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		promotion_id, promotion_name, promotion_src, width, height, promotion_type,
+		promotion_id, promotion_name, promotion_src, width, height,
+		promotion_type,
 		start_time,
 		end_time, promotion_url
 	</sql>
@@ -31,17 +32,22 @@
 		where promotion_id = #{promotionId,jdbcType=BIGINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from promotion
+		delete from
+		promotion
 		where promotion_id = #{promotionId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.Promotion">
-		insert into promotion (promotion_id, promotion_name, promotion_src,
-		width, height, promotion_type,
+		insert into promotion
+		(promotion_id, promotion_name, promotion_src,
+		width, height,
+		promotion_type,
 		start_time, end_time, promotion_url
 		)
-		values (#{promotionId,jdbcType=BIGINT}, #{promotionName,jdbcType=VARCHAR},
+		values
+		(#{promotionId,jdbcType=BIGINT}, #{promotionName,jdbcType=VARCHAR},
 		#{promotionSrc,jdbcType=VARCHAR},
-		#{width,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{promotionType,jdbcType=TINYINT},
+		#{width,jdbcType=INTEGER},
+		#{height,jdbcType=INTEGER}, #{promotionType,jdbcType=TINYINT},
 		#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
 		#{promotionUrl,jdbcType=VARCHAR}
 		)
@@ -140,13 +146,19 @@
 	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.Promotion">
 		update promotion
 		set promotion_name = #{promotionName,jdbcType=VARCHAR},
-		promotion_src = #{promotionSrc,jdbcType=VARCHAR},
+		promotion_src =
+		#{promotionSrc,jdbcType=VARCHAR},
 		width = #{width,jdbcType=INTEGER},
 		height = #{height,jdbcType=INTEGER},
-		promotion_type = #{promotionType,jdbcType=TINYINT},
-		start_time = #{startTime,jdbcType=TIMESTAMP},
-		end_time = #{endTime,jdbcType=TIMESTAMP},
-		promotion_url = #{promotionUrl,jdbcType=VARCHAR}
-		where promotion_id = #{promotionId,jdbcType=BIGINT}
+		promotion_type =
+		#{promotionType,jdbcType=TINYINT},
+		start_time =
+		#{startTime,jdbcType=TIMESTAMP},
+		end_time =
+		#{endTime,jdbcType=TIMESTAMP},
+		promotion_url =
+		#{promotionUrl,jdbcType=VARCHAR}
+		where promotion_id =
+		#{promotionId,jdbcType=BIGINT}
 	</update>
 </mapper>

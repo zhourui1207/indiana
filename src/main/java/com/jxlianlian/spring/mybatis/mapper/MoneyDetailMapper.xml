@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jxlianlian.spring.mybatis.dao.MoneyDetailMapper">
-  <!-- Cache 配置 -->  
-  <cache eviction="LRU" flushInterval="300000" size="10240"/>
+	<!-- Cache 配置 -->
+	<cache eviction="LRU" flushInterval="300000" size="10240" />
 	<resultMap id="BaseResultMap"
 		type="com.jxlianlian.spring.mybatis.model.MoneyDetail">
 		<id column="money_detail_id" property="moneyDetailId" jdbcType="BIGINT" />
@@ -13,34 +13,41 @@
 		<result column="money" property="money" jdbcType="DECIMAL" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		money_detail_id, user_id, money_type, way, insert_time, money
+		money_detail_id, user_id, money_type, way, insert_time,
+		money
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
 		from money_detail
-		where money_detail_id = #{moneyDetailId,jdbcType=BIGINT}
+		where money_detail_id =
+		#{moneyDetailId,jdbcType=BIGINT}
 	</select>
 	<select id="selectByUserId" resultMap="BaseResultMap"
-    parameterType="java.lang.Long">
-    select
-    <include refid="Base_Column_List" />
-    from money_detail
-    where user_id = #{userId,jdbcType=BIGINT}
-    order by insert_time desc
-  </select>
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from money_detail
+		where user_id = #{userId,jdbcType=BIGINT}
+		order by
+		insert_time desc
+	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from money_detail
+		delete from
+		money_detail
 		where money_detail_id = #{moneyDetailId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.jxlianlian.spring.mybatis.model.MoneyDetail">
-		insert into money_detail (money_detail_id, user_id, money_type,
+		insert into money_detail
+		(money_detail_id, user_id, money_type,
 		way, insert_time, money
 		)
-		values (#{moneyDetailId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+		values
+		(#{moneyDetailId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
 		#{moneyType,jdbcType=TINYINT},
-		#{way,jdbcType=TINYINT}, #{insertTime,jdbcType=TIMESTAMP}, #{money,jdbcType=DECIMAL}
+		#{way,jdbcType=TINYINT},
+		#{insertTime,jdbcType=TIMESTAMP}, #{money,jdbcType=DECIMAL}
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.jxlianlian.spring.mybatis.model.MoneyDetail">
@@ -108,12 +115,16 @@
 		where money_detail_id = #{moneyDetailId,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.jxlianlian.spring.mybatis.model.MoneyDetail">
-		update money_detail
+		update
+		money_detail
 		set user_id = #{userId,jdbcType=BIGINT},
-		money_type = #{moneyType,jdbcType=TINYINT},
+		money_type =
+		#{moneyType,jdbcType=TINYINT},
 		way = #{way,jdbcType=TINYINT},
 		insert_time = #{insertTime,jdbcType=TIMESTAMP},
-		money = #{money,jdbcType=DECIMAL}
-		where money_detail_id = #{moneyDetailId,jdbcType=BIGINT}
+		money =
+		#{money,jdbcType=DECIMAL}
+		where money_detail_id =
+		#{moneyDetailId,jdbcType=BIGINT}
 	</update>
 </mapper>

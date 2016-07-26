@@ -10,8 +10,13 @@
 <script type="text/javascript"
 	src="//g.alicdn.com/sd/ncpc/nc.js?t=1469080174697"></script>
 <!-- 引入结束 -->
+
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<!--     <script type="text/javascript" charset="utf-8" src="example.js"></script> -->
+
+
 </head>
-<body>
+<body onload="onLoad()">
 
 	<!-- 此段必须要引入 -->
 	<div id="_umfp"
@@ -20,8 +25,7 @@
 
 	<!-- 表单示例，请替换成您的业务表单 -->
 	<div class="container">
-		<form action="http://localhost:8080/IndianaServer/api/1/users"
-			method="post">
+		<form action="api/1/users" method="post">
 			<div class="ln">
 				<span class="h">用户名：</span> <input type="text" name="userAccount">
 			</div>
@@ -33,17 +37,54 @@
 				<div id="dom_id"></div>
 			</div>
 			<input type='hidden' id='csessionid' name='csessionid' /> <input
-				type='hidden' id='sig' name='sig' /> <input type='hidden' id='token'
-				name='token' /> <input type='hidden' id='scene' name='scene' />
+				type='hidden' id='sig' name='sig' /> <input type='hidden'
+				id='token' name='token' /> <input type='hidden' id='scene'
+				name='scene' />
 			<div class="ln">
 				<input type="submit" value="提交">
 			</div>
+			<img id="myImage" alt="" src="">
 		</form>
 	</div>
 	<!-- 表单示例结束 -->
 
 	<!-- 此段必须要引入 -->
 	<script>
+	
+	function onLoad() {
+	    document.addEventListener("deviceready", onDeviceReady, false);
+	}
+
+	// device APIs are available
+	//
+	function onDeviceReady() {
+	    document.addEventListener("pause", onPause, false);
+	    document.addEventListener("resume", onResume, false);
+	    document.addEventListener("menubutton", onMenuKeyDown, false);
+	    document.addEventListener("volumedownbutton", onVolumeDownKeyDown, false);
+	    // Add similar listeners for other events
+	}
+
+	function onPause() {
+	    // Handle the pause event
+	    alert("onPause");
+	}
+
+	function onResume() {
+	    // Handle the resume event
+		alert("onResume");
+	}
+
+	function onMenuKeyDown() {
+	    // Handle the menubutton event
+		alert("onMenuKeyDown");
+	}
+
+	function onVolumeDownKeyDown() {
+        // Handle the volume down button
+		alert("onVolumeDownKeyDown");
+    }
+	
   var nc = new noCaptcha();
   var nc_appkey = '9YQA';  // 应用标识,不可更改
   //var nc_appkey = 'CF_APP_1'

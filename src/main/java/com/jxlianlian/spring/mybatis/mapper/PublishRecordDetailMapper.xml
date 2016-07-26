@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jxlianlian.spring.mybatis.dao.PublishRecordDetailMapper">
-  <!-- Cache 配置 -->  
-  <cache eviction="LRU" flushInterval="30000" size="128"/>
+	<!-- Cache 配置 -->
+	<cache eviction="LRU" flushInterval="30000" size="128" />
 	<resultMap id="BaseResultMap"
 		type="com.jxlianlian.spring.mybatis.model.PublishRecordDetail">
 		<id column="publish_record_detail_id" property="publishRecordDetailId"
@@ -35,46 +35,59 @@
 			jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		publish_record_detail_id, goods_status, user_id, goods_id, goods_name, little_pic,
-		total, buy_count, lucky_number, publish_time, consignee, phone,
+		publish_record_detail_id, goods_status, user_id, goods_id,
+		goods_name, little_pic,
+		total, buy_count, lucky_number, publish_time,
+		consignee, phone,
 		shipping_address,
-		confirm_shipping_address_time, logistics_name, logistics_company, waybill_number,
-		shipper, deliver_goods_time, confirm_receive_time
+		confirm_shipping_address_time,
+		logistics_name, logistics_company, waybill_number,
+		shipper,
+		deliver_goods_time, confirm_receive_time
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
 		from publish_record_detail
-		where publish_record_detail_id = #{publishRecordDetailId,jdbcType=BIGINT}
+		where publish_record_detail_id =
+		#{publishRecordDetailId,jdbcType=BIGINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from publish_record_detail
-		where publish_record_detail_id = #{publishRecordDetailId,jdbcType=BIGINT}
+		delete from
+		publish_record_detail
+		where publish_record_detail_id =
+		#{publishRecordDetailId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert"
 		parameterType="com.jxlianlian.spring.mybatis.model.PublishRecordDetail">
-		insert into publish_record_detail (publish_record_detail_id,
+		insert into publish_record_detail
+		(publish_record_detail_id,
 		goods_status,
 		user_id, goods_id, goods_name,
 		little_pic, total, buy_count,
 		lucky_number, publish_time, consignee,
 		phone, shipping_address, confirm_shipping_address_time,
 		logistics_name, logistics_company, waybill_number,
-		shipper, deliver_goods_time, confirm_receive_time
+		shipper,
+		deliver_goods_time, confirm_receive_time
 		)
-		values (#{publishRecordDetailId,jdbcType=BIGINT},
+		values
+		(#{publishRecordDetailId,jdbcType=BIGINT},
 		#{goodsStatus,jdbcType=INTEGER},
-		#{userId,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR},
+		#{userId,jdbcType=BIGINT},
+		#{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR},
 		#{littlePic,jdbcType=VARCHAR}, #{total,jdbcType=BIGINT},
 		#{buyCount,jdbcType=VARCHAR},
-		#{luckyNumber,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, #{consignee,jdbcType=VARCHAR},
+		#{luckyNumber,jdbcType=VARCHAR},
+		#{publishTime,jdbcType=TIMESTAMP}, #{consignee,jdbcType=VARCHAR},
 		#{phone,jdbcType=VARCHAR}, #{shippingAddress,jdbcType=VARCHAR},
 		#{confirmShippingAddressTime,jdbcType=TIMESTAMP},
 		#{logisticsName,jdbcType=VARCHAR},
 		#{logisticsCompany,jdbcType=VARCHAR},
 		#{waybillNumber,jdbcType=VARCHAR},
-		#{shipper,jdbcType=BIGINT}, #{deliverGoodsTime,jdbcType=TIMESTAMP},
+		#{shipper,jdbcType=BIGINT},
+		#{deliverGoodsTime,jdbcType=TIMESTAMP},
 		#{confirmReceiveTime,jdbcType=TIMESTAMP}
 		)
 	</insert>
@@ -263,10 +276,12 @@
 				shipper = #{shipper,jdbcType=BIGINT},
 			</if>
 			<if test="deliverGoodsTime != null">
-				deliver_goods_time = #{deliverGoodsTime,jdbcType=TIMESTAMP},
+				deliver_goods_time =
+				#{deliverGoodsTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="confirmReceiveTime != null">
-				confirm_receive_time = #{confirmReceiveTime,jdbcType=TIMESTAMP},
+				confirm_receive_time =
+				#{confirmReceiveTime,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where publish_record_detail_id =
@@ -275,25 +290,39 @@
 	<update id="updateByPrimaryKey"
 		parameterType="com.jxlianlian.spring.mybatis.model.PublishRecordDetail">
 		update publish_record_detail
-		set goods_status = #{goodsStatus,jdbcType=INTEGER},
+		set goods_status =
+		#{goodsStatus,jdbcType=INTEGER},
 		user_id = #{userId,jdbcType=BIGINT},
 		goods_id = #{goodsId,jdbcType=BIGINT},
-		goods_name = #{goodsName,jdbcType=VARCHAR},
-		little_pic = #{littlePic,jdbcType=VARCHAR},
+		goods_name =
+		#{goodsName,jdbcType=VARCHAR},
+		little_pic =
+		#{littlePic,jdbcType=VARCHAR},
 		total = #{total,jdbcType=BIGINT},
 		buy_count = #{buyCount,jdbcType=VARCHAR},
-		lucky_number = #{luckyNumber,jdbcType=VARCHAR},
-		publish_time = #{publishTime,jdbcType=TIMESTAMP},
-		consignee = #{consignee,jdbcType=VARCHAR},
+		lucky_number =
+		#{luckyNumber,jdbcType=VARCHAR},
+		publish_time =
+		#{publishTime,jdbcType=TIMESTAMP},
+		consignee =
+		#{consignee,jdbcType=VARCHAR},
 		phone = #{phone,jdbcType=VARCHAR},
 		shipping_address = #{shippingAddress,jdbcType=VARCHAR},
-		confirm_shipping_address_time = #{confirmShippingAddressTime,jdbcType=TIMESTAMP},
-		logistics_name = #{logisticsName,jdbcType=VARCHAR},
-		logistics_company = #{logisticsCompany,jdbcType=VARCHAR},
-		waybill_number = #{waybillNumber,jdbcType=VARCHAR},
-		shipper = #{shipper,jdbcType=BIGINT},
-		deliver_goods_time = #{deliverGoodsTime,jdbcType=TIMESTAMP},
-		confirm_receive_time = #{confirmReceiveTime,jdbcType=TIMESTAMP}
-		where publish_record_detail_id = #{publishRecordDetailId,jdbcType=BIGINT}
+		confirm_shipping_address_time =
+		#{confirmShippingAddressTime,jdbcType=TIMESTAMP},
+		logistics_name =
+		#{logisticsName,jdbcType=VARCHAR},
+		logistics_company =
+		#{logisticsCompany,jdbcType=VARCHAR},
+		waybill_number =
+		#{waybillNumber,jdbcType=VARCHAR},
+		shipper =
+		#{shipper,jdbcType=BIGINT},
+		deliver_goods_time =
+		#{deliverGoodsTime,jdbcType=TIMESTAMP},
+		confirm_receive_time =
+		#{confirmReceiveTime,jdbcType=TIMESTAMP}
+		where publish_record_detail_id
+		= #{publishRecordDetailId,jdbcType=BIGINT}
 	</update>
 </mapper>
